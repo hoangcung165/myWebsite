@@ -5,11 +5,13 @@
              version="2.0">
         <persistence-unit name="myDB">
             <properties>
-                <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/news"/>
+                <property name="javax.persistence.jdbc.url" value="jdbc:mysql://u655h7q4coizsa6o:YRs6W7ChttCHfnCWYnJQ@bkrd4dmvgmbunzutgnyf-mysql.services.clever-cloud.com:3306/bkrd4dmvgmbunzutgnyf"/>
                 <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-                <property name="javax.persistence.jdbc.user" value="root"/>
-                <property name="javax.persistence.jdbc.password" value="cunglatao123"/>
-                <property name="hibernate.hbm2đl.auto" value="update"/>
+                <property name="javax.persistence.jdbc.user" value="u655h7q4coizsa6o"/>
+                <property name="javax.persistence.jdbc.password" value="YRs6W7ChttCHfnCWYnJQ"/>
+                <property name="hibernate.hbm2ddl.auto" value="update"/>
+                <property name="hibernate.current_session_context_class" value="thread"/>
+                <property name="hibernate.show_sql" value="true"/>
             </properties>
         </persistence-unit>
 </persistence>

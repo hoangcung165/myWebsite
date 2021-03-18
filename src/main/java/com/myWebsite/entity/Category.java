@@ -4,11 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "category")
-public class Category {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Category extends BaseEntity{
 
     @Column(name = "name")
     private String name;
@@ -19,15 +15,13 @@ public class Category {
     public Category() {
     }
 
-    public Category(Long id, String name, String code) {
-        this.id = id;
+    public Category( String name, String code) {
+
         this.name = name;
         this.code = code;
     }
 
-    public Long getId() {
-        return id;
-    }
+
 
     public String getName() {
         return name;
@@ -37,9 +31,7 @@ public class Category {
         return code;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+
 
     public void setName(String name) {
         this.name = name;
