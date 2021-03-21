@@ -1,31 +1,39 @@
 package com.myWebsite.entity;
 
-import javax.persistence.Column;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
-@MappedSuperclass
-public class User extends BaseEntity{
+@Entity
+@Table(name = "person")
+public class Person extends BaseEntity{
     @Column(name = "name")
-    protected String name;
+    private String name;
     @Column(name = "mail")
-    protected String mail;
+    private String mail;
     @Column(name = "phone")
-    protected String phone;
+    private String phone;
     @Column(name = "birthday")
-    protected Date birtday;
+    private Date birtday;
     @Column(name = "nationality")
-    protected String nationality;
+    private String nationality;
     @Column(name = "gender")
-    protected String gender;
+    private String gender;
     @Column(name = "address")
-    protected String address;
-    @Column(name = "username")
-    protected String userName;
+    private String address;
+    @Column(name = "username",unique = true)
+    private String userName;
     @Column(name = "password")
-    protected String password;
+    private String password;
+    @Column(name = "status")
+    private int status;
 
-    public User() {
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @JoinTable(name = "Person_Role",joinColumns = @JoinColumn(name = "person_id"),inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private List<Role> roleList=new ArrayList<>();
+
+    public Person() {
     }
 
     public String getName() {
@@ -98,5 +106,21 @@ public class User extends BaseEntity{
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public List<Role> getRoleList() {
+        return roleList;
+    }
+
+    public void setRoleList(List<Role> roleList) {
+        this.roleList = roleList;
     }
 }

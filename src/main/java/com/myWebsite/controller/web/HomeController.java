@@ -1,21 +1,20 @@
 package com.myWebsite.controller.web;
 
 
-import com.myWebsite.entity.Category;
-import com.myWebsite.entity.Room;
-import com.myWebsite.entity.RoomName;
-import com.myWebsite.entity.TypeRoom;
+import com.myWebsite.entity.*;
+import com.myWebsite.reposity.PersonReposity;
+import com.myWebsite.reposity.RoomNameReposity;
 import com.myWebsite.service.CategoryService;
 import com.myWebsite.service.RoomService;
 import com.myWebsite.service.TypeRoomService;
+import com.myWebsite.service.UserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 public class HomeController {
@@ -27,15 +26,17 @@ public class HomeController {
     @Autowired
     private TypeRoomService typeRoomService;
 
-    @Autowired
-    private RoomService roomService;
+
+
+
+
 
     @RequestMapping(value = "/home",method = RequestMethod.GET)
     public ModelAndView myPage(){
-        List<Category> categoryList=categoryService.getAll();
-        for(Category category:categoryList){
-            System.out.println(category.getName());
-        }
+//        List<Category> categoryList=categoryService.getAll();
+//        for(Category category:categoryList){
+//            System.out.println(category.getName());
+//        }
         System.out.println("home Page");
         ModelAndView mav=new ModelAndView("web/home");
 //
@@ -60,16 +61,17 @@ public class HomeController {
 //
 //        typeRoomService.save(typeRoom);
 
-        TypeRoom typeRoom=typeRoomService.findByID(1L);
-        System.out.println(typeRoom.getType());
-        RoomName roomName=typeRoom.getRoomNames().get(0);
-        System.out.println(roomName.getName());
-        Room room=new Room();
-        room.setSize(235);
-        room.setTypeRoom(typeRoom);
-        room.setRoomName(roomName);
+//        TypeRoom typeRoom=typeRoomService.findByID(1L);
+//        System.out.println(typeRoom.getType());
+//        RoomName roomName=typeRoom.getRoomNames().get(0);
+//        System.out.println(roomName.getName());
+//        Room room=new Room();
+//        room.setSize(235);
+//        room.setTypeRoom(typeRoom);
+//        room.setRoomName(roomName);
+//
+//        roomService.save(room);
 
-        roomService.save(room);
 
         return mav;
     }
@@ -84,9 +86,31 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/login",method = RequestMethod.GET)
-    public ModelAndView loginPage(){
-        System.out.println("home Page");
+    public ModelAndView loginPage(@RequestParam(value = "error", required = false) final String error,
+                                  final Model model){
+        System.out.println("Login");
+        if (error != null) {
+            model.addAttribute("message", "Login Failed!");
+        }
         ModelAndView mav=new ModelAndView("login/loginPage");
         return mav;
     }
+
+
+    @RequestMapping("/logout")
+    public String logout(final Model model){
+        model.addAttribute("message","logout");
+        return "login";
+    }
+
+
+    @RequestMapping("/admin")
+    public String adminPgae() {
+        return "admin/dashbord";
+    }
+
+//    @RequestMapping(value = "/test",method = RequestMethod.POST)
+//    public String test(@ModelAttribute("formUser") Person person){
+//        return "web/home";
+//    }
 }

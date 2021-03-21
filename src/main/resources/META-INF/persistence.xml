@@ -5,12 +5,12 @@
              version="2.0">
         <persistence-unit name="myDB">
             <properties>
-                <property name="javax.persistence.jdbc.url" value="jdbc:mysql://u655h7q4coizsa6o:YRs6W7ChttCHfnCWYnJQ@bkrd4dmvgmbunzutgnyf-mysql.services.clever-cloud.com:3306/bkrd4dmvgmbunzutgnyf"/>
+                <property name="javax.persistence.jdbc.url" value="jdbc:mysql://uf5y0gibbu7fkied:bAFX5RqEol71eXWJgJp7@b8y3qdiyc9k7erxp6ool-mysql.services.clever-cloud.com:3306/b8y3qdiyc9k7erxp6ool"/>
                 <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-                <property name="javax.persistence.jdbc.user" value="u655h7q4coizsa6o"/>
-                <property name="javax.persistence.jdbc.password" value="YRs6W7ChttCHfnCWYnJQ"/>
+                <property name="javax.persistence.jdbc.user" value="uf5y0gibbu7fkied"/>
+                <property name="javax.persistence.jdbc.password" value="bAFX5RqEol71eXWJgJp7"/>
                 <property name="hibernate.hbm2ddl.auto" value="update"/>
-                <property name="hibernate.current_session_context_class" value="thread"/>
+<!--                <property name="hibernate.current_session_context_class" value="thread"/>-->
                 <property name="hibernate.show_sql" value="true"/>
             </properties>
         </persistence-unit>

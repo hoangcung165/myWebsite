@@ -1,5 +1,10 @@
 package com.myWebsite.entity;
 
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -11,15 +16,21 @@ public abstract class BaseEntity {
     private Long id;
 
     @Column(name = "createddate")
+    @CreatedDate
     private Date createddate;
 
+
     @Column(name = "modifieddate")
+    @LastModifiedDate
     private Date modifieddate;
 
     @Column(name = "createdby")
+    @CreatedBy
     private String createdby;
 
+
     @Column(name = "modifiedby")
+    @LastModifiedBy
     private String modifiedby;
 
     public Long getId() {
