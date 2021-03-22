@@ -12,6 +12,9 @@
                 <property name="hibernate.hbm2ddl.auto" value="update"/>
 <!--                <property name="hibernate.current_session_context_class" value="thread"/>-->
                 <property name="hibernate.show_sql" value="true"/>
+                <property name="packagesToScan" value="com.myWebsite.reposity"/>
             </properties>
         </persistence-unit>
+<!--        <jpa:repositories base-package="com.baeldung.spring.data.persistence.repository" />-->
+
 </persistence>

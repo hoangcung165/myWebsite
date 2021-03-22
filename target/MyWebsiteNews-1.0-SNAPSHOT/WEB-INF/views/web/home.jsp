@@ -1,7 +1,12 @@
 <%@include file="/common/taglib.jsp"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="container">
-
+    <c:if test="${error.equals('denied')}">
+        <div class="alert alert-warning alert-dismissible fade in ">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Warning!</strong> The user was denied, you don't have role to require.
+        </div>
+    </c:if>
     <div class="row">
 
         <!-- Blog Entries Column -->

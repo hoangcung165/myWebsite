@@ -16,4 +16,5 @@ public class RoomServiceImp implements  RoomService{
     public Room save(Room room) {
         return roomReposity.save(room);
     }
+
 }
