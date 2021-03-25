@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface PersonReposity extends JpaRepository<Person,Long> {
     Person findPersonByUserNameAndStatus(String userName,int status);
-
+    Person findPersonByMail(String mail);
 }

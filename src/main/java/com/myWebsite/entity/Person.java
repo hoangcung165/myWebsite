@@ -20,8 +20,11 @@ public class Person extends BaseEntity{
     private String nationality;
     @Column(name = "gender")
     private String gender;
-    @Column(name = "address")
-    private String address;
+
+    @OneToOne
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
+    private Address address;
+
     @Column(name = "username",unique = true)
     private String userName;
     @Column(name = "password")
@@ -32,6 +35,8 @@ public class Person extends BaseEntity{
     @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinTable(name = "Person_Role",joinColumns = @JoinColumn(name = "person_id"),inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<Role> roleList=new ArrayList<>();
+
+
 
     public Person() {
     }
@@ -84,11 +89,11 @@ public class Person extends BaseEntity{
         this.gender = gender;
     }
 
-    public String getAddress() {
+    public Address getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
+    public void setAddress(Address address) {
         this.address = address;
     }
 
@@ -122,5 +127,22 @@ public class Person extends BaseEntity{
 
     public void setRoleList(List<Role> roleList) {
         this.roleList = roleList;
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "name='" + name + '\'' +
+                ", mail='" + mail + '\'' +
+                ", phone='" + phone + '\'' +
+                ", birtday=" + birtday +
+                ", nationality='" + nationality + '\'' +
+                ", gender='" + gender + '\'' +
+                ", address=" + address +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", status=" + status +
+                ", roleList=" + roleList +
+                '}';
     }
 }

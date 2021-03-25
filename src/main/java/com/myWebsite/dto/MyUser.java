@@ -19,6 +19,7 @@ public class MyUser extends User {
     }
 
     private String fullName;
+    private Long user_id;
 
     public String getFullName() {
         return fullName;
@@ -26,5 +27,13 @@ public class MyUser extends User {
 
     public void setFullName(String fullName) {
         this.fullName = fullName;
+    }
+
+    public Long getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(Long user_id) {
+        this.user_id = user_id;
     }
 }
