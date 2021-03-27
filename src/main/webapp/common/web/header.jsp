@@ -43,7 +43,7 @@
                             <i class="fa fa-user" style="color: black;font-size:25px"></i> <p style="color: black"><%=SecurityUtils.getPrincial().getFullName()%></p>
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="<c:url value="/profile"/> ">Profile</a>
                             <a class="dropdown-item" href="#">Another action</a>
                             <a class="dropdown-item" href="<c:url value="/j_spring_security_logout"/>">Logout</a>
                         </div>

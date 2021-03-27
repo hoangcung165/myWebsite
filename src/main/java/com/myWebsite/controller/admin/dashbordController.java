@@ -19,6 +19,9 @@ public class dashbordController {
     public ModelAndView adminPgae() {
         System.out.println("admin");
         List<Person> personList=personService.findAll();
+        for(Person person:personList){
+            System.out.println(person.getName());
+        }
         ModelAndView modelAndView=new ModelAndView("admin/dashbord");
         modelAndView.addObject("listUser",personList);
 

@@ -1,37 +1,32 @@
 package com.myWebsite.controller.web;
 
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.myWebsite.constant.SystemConstant;
 import com.myWebsite.dto.MyUser;
 import com.myWebsite.dto.formRegister;
 import com.myWebsite.entity.*;
-import com.myWebsite.reposity.PersonReposity;
-import com.myWebsite.reposity.RoomNameReposity;
+import com.myWebsite.random.RandomString;
 import com.myWebsite.service.*;
 import com.myWebsite.utils.SecurityUtils;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
-import java.security.Principal;
+import javax.servlet.http.HttpSession;
+import java.io.*;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Controller
 public class HomeController {
+
 
     @Autowired
     private TypeRoomService typeRoomService;
@@ -48,6 +43,10 @@ public class HomeController {
 
     @Autowired
     private PersonService personService;
+    @Autowired
+    ServletContext servletContext;
+    @Autowired
+    private ImageService imageService;
 
 
     @RequestMapping(value = "/home",method = RequestMethod.GET)
@@ -120,12 +119,31 @@ public class HomeController {
         return "redirect:/";
 
     }
-    @RequestMapping(value = "/test")
-    public String test(){
-        Person person=new Person();
-        person.setUserName("a");
-        personService.save(person);
+    @RequestMapping(value = "/testRoot")
+    public String testRoot(HttpServletRequest request) throws UnsupportedEncodingException {
+        RandomString randomString=new RandomString();
+        String generatedString =randomString.getAlphaNumericString(10);
+        System.out.println(generatedString);
+        return "redirect:/";}
+    @RequestMapping(value = "/test",method = RequestMethod.POST)
+    public String test(@RequestParam("file")CommonsMultipartFile file, HttpSession session,HttpServletRequest request){
+        imageService.uploadImage(file);
         return "redirect:/";
+    }
+    @RequestMapping(value = "/upfile")
+    public String upfile(){
+        return "web/test";
+    }
+    @RequestMapping(value = "/profile")
+    public ModelAndView profile(Authentication authentication){
+        if(authentication!=null){
+            MyUser myUser=SecurityUtils.getPrincial();
+            System.out.println(myUser.getUser_id());
+            ModelAndView mad=new ModelAndView("web/profile");
+            mad.addObject("userProfile",personService.findById(myUser.getUser_id()));
+            return mad;
+        }
+        return new ModelAndView("redirect:/");
     }
     @RequestMapping(value = "/manager")
     public String managerPage(){

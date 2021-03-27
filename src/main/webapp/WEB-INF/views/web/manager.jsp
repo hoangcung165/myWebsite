@@ -1,4 +1,5 @@
-
+<%@include file="/common/taglib.jsp"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="manager" style="height: 1000px">
     <table class="table">
         <thead>

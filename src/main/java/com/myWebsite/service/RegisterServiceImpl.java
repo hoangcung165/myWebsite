@@ -45,6 +45,9 @@ public class RegisterServiceImpl implements RegisterService{
     @Autowired
     private ManagerService managerService;
 
+    @Autowired
+    private ImageService imageService;
+
     @Override
     public boolean register(formRegister register) throws ParseException {
         Person person=new Person();
@@ -60,6 +63,9 @@ public class RegisterServiceImpl implements RegisterService{
         person.setGender(register.getGender());
         person.setUserName(register.getUserName());
         person.setStatus(1);
+
+        Image image= imageService.findById(1L);
+        person.setImage(image);
 
         setRolesForPerson(person,SystemConstant.USER_ROLE);
         Address address=new Address();
@@ -97,7 +103,13 @@ public class RegisterServiceImpl implements RegisterService{
             Manager manager=new Manager();
             manager.setPerson(person);
             managerService.save(manager);
-
+            Authentication authentication=SecurityContextHolder.getContext().getAuthentication();
+            List<GrantedAuthority> grantedAuthorities=new ArrayList<>();
+            for(Role role:person.getRoleList()){
+                grantedAuthorities.add(new SimpleGrantedAuthority(role.getCode()));
+            }
+            Authentication newAuth=new UsernamePasswordAuthenticationToken(authentication.getPrincipal(),authentication.getCredentials(),grantedAuthorities);
+            SecurityContextHolder.getContext().setAuthentication(newAuth);
             return true;
         }
         catch (Exception e){

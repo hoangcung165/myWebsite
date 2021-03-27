@@ -20,6 +20,9 @@ public class Person extends BaseEntity{
     private String nationality;
     @Column(name = "gender")
     private String gender;
+    @OneToOne
+    @JoinColumn(name = "avatar_id")
+    private Image image;
 
     @OneToOne
     @JoinColumn(name = "address_id", referencedColumnName = "id")
@@ -35,6 +38,7 @@ public class Person extends BaseEntity{
     @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     @JoinTable(name = "Person_Role",joinColumns = @JoinColumn(name = "person_id"),inverseJoinColumns = @JoinColumn(name = "role_id"))
     private List<Role> roleList=new ArrayList<>();
+
 
 
 
@@ -127,6 +131,14 @@ public class Person extends BaseEntity{
 
     public void setRoleList(List<Role> roleList) {
         this.roleList = roleList;
+    }
+
+    public Image getImage() {
+        return image;
+    }
+
+    public void setImage(Image image) {
+        this.image = image;
     }
 
     @Override
