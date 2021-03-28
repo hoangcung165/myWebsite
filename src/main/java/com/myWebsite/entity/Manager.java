@@ -1,6 +1,7 @@
 package com.myWebsite.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "manager")
@@ -12,6 +13,9 @@ public class Manager extends BaseEntity{
     @OneToOne
     @JoinColumn(name = "user_id")
     private Person person;
+
+    @OneToMany(mappedBy = "owner")
+    private List<Apartment> apartmentList;
 
     public Manager() {
     }

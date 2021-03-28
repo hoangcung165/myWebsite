@@ -1,6 +1,8 @@
 package com.myWebsite.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "Room")
@@ -19,6 +21,10 @@ public class Room extends BaseEntity{
     private int price;
 //    private String codeSale;
 
+    @OneToMany(mappedBy = "roomBed")
+    private List<Bed> bedList=new ArrayList<>();
+
+
     @OneToOne
     @JoinColumn(name = "typeRoom_id",referencedColumnName = "id")
     private TypeRoom typeRoom;
@@ -26,6 +32,10 @@ public class Room extends BaseEntity{
     @OneToOne
     @JoinColumn(name = "roomName_id",referencedColumnName = "id")
     private RoomName roomName;
+
+    @ManyToOne
+    @JoinColumn(name = "apartment_id")
+    private Apartment apartment;
     public Room() {
     }
     public TypeRoom getTypeRoom() {

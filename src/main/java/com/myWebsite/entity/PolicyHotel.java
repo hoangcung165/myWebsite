@@ -1,6 +1,14 @@
 package com.myWebsite.entity;
 
+import javax.persistence.*;
+import java.util.Date;
+
+@Entity
+@Table(name = "policyHotel")
 public class PolicyHotel extends BaseEntity{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private boolean child;
     private boolean pet;
     private boolean cancel;
@@ -32,6 +40,15 @@ public class PolicyHotel extends BaseEntity{
 
     public void setCancel(boolean cancel) {
         this.cancel = cancel;
+    }
+
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getTimeReceiveRoom() {

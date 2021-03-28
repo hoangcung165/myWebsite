@@ -12,6 +12,10 @@ public class Image {
 
     private String url;
 
+    @ManyToOne
+    @JoinColumn(name = "apartment_id")
+    private Apartment apartment_img;
+
 
     public Image() {
     }

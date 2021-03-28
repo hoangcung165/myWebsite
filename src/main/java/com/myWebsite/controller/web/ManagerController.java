@@ -35,6 +35,8 @@ public class ManagerController {
 
     @RequestMapping(value = "/manager")
     public String managerPage(){
+        MyUser myUser= SecurityUtils.getPrincial();
+        Person person=personService.findById(myUser.getUser_id());
         return "web/manager";
     }
 

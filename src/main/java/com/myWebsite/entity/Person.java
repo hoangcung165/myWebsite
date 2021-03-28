@@ -40,8 +40,6 @@ public class Person extends BaseEntity{
     private List<Role> roleList=new ArrayList<>();
 
 
-
-
     public Person() {
     }
 

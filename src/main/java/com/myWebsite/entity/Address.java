@@ -26,6 +26,11 @@ public class Address extends BaseEntity{
     @OneToOne(mappedBy = "address")
     private Person person;
 
+    @OneToOne(mappedBy = "addressApartment")
+    private Apartment apartment;
+
+
+
     public Address() {
     }
 
