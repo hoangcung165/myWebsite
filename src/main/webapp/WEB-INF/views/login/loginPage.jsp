@@ -2,6 +2,22 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <section class="ftco-section">
     <div class="container">
+        <c:if test="${mess.equals('Login faild')}">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Login fial!</strong> You should check in on some of those fields below.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </c:if>
+        <c:if test="${mess.equals('Wellcome')}">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Wellcome!</strong> You can login by account you have registed.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </c:if>
         <div class="row justify-content-center">
             <div class="col-md-6 text-center mb-5">
                 <h2 class="heading-section">Login</h2>

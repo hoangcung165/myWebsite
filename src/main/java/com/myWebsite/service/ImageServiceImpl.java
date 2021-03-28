@@ -8,10 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
+import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 
 @Service
 @Transactional
@@ -19,9 +22,10 @@ public class ImageServiceImpl implements ImageService{
     @Autowired
     private ImageRepository repository;
 
-
+    @Autowired
+    ServletContext servletContext;
     @Override
-    public boolean uploadImage(CommonsMultipartFile file) {
+    public Image uploadImage(CommonsMultipartFile file) {
         try{
             String path= SystemConstant.url_store;
             String filename=file.getOriginalFilename();
@@ -31,6 +35,7 @@ public class ImageServiceImpl implements ImageService{
                 randomEx=generateNewFileName();
                 fileEx=new File(path+randomEx+filename);
             }
+            copyToTarget(file,randomEx+filename);
             FileOutputStream fileOutputStream=new FileOutputStream(fileEx);
             BufferedOutputStream bufferedOutputStream=new BufferedOutputStream(fileOutputStream);
             byte barr[]= file.getBytes();
@@ -39,10 +44,11 @@ public class ImageServiceImpl implements ImageService{
             bufferedOutputStream.close();
             Image image=new Image();
             image.setUrl(randomEx+filename);
+
             repository.save(image);
-            return true;
+            return image;
         }catch (Exception e){
-            return false;}
+            return null;}
 
     }
 
@@ -57,5 +63,21 @@ public class ImageServiceImpl implements ImageService{
         return random;
     }
 
+    private void copyToTarget(CommonsMultipartFile file,String name){
+
+        String path=servletContext.getRealPath("template/static/uploadfile/");
+
+        try {
+            byte[] bytes = file.getBytes();
+            BufferedOutputStream stream =new BufferedOutputStream(new FileOutputStream(
+                    new File(path+name)));
+            stream.write(bytes);
+            stream.flush();
+            stream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 
 }

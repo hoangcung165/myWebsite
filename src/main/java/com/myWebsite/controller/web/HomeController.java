@@ -2,7 +2,9 @@ package com.myWebsite.controller.web;
 
 
 import com.myWebsite.constant.SystemConstant;
+import com.myWebsite.dto.ChangePassword;
 import com.myWebsite.dto.MyUser;
+import com.myWebsite.dto.UserUpdateInfor;
 import com.myWebsite.dto.formRegister;
 import com.myWebsite.entity.*;
 import com.myWebsite.random.RandomString;
@@ -74,8 +76,6 @@ public class HomeController {
     @RequestMapping(value = "/accessDenied" )
     public String DenielPage(@RequestParam(value = "denied",required = false) String denied, Authentication authentication){
 
-
-
         List<String> roles= SecurityUtils.getAuthorites();
         System.out.println(roles.get(0));
         if(!roles.contains("ROLE_MANAGER")){
@@ -89,12 +89,18 @@ public class HomeController {
 
     @RequestMapping(value = "/login",method = RequestMethod.GET)
     public ModelAndView loginPage(@RequestParam(value = "error", required = false) final String error,
+                                  @RequestParam(value = "registed", required = false) final String registed,
                                   final Model model){
-        System.out.println("Login");
+        String message="";
         if (error != null) {
-            model.addAttribute("message", "Login Failed!");
+            message="Login faild";
         }
+        if(registed!=null){
+            message="Wellcome";
+        }
+
         ModelAndView mav=new ModelAndView("login/loginPage");
+        mav.addObject("mess",message);
         return mav;
     }
 
@@ -116,54 +122,83 @@ public class HomeController {
     @RequestMapping(value = "/saveUser",method = RequestMethod.POST)
     public String saveUser(@ModelAttribute("formRegister")formRegister formRegister) throws ParseException {
         registerService.register(formRegister);
-        return "redirect:/";
+        return "redirect:/login?registed=success";
 
     }
+
     @RequestMapping(value = "/testRoot")
     public String testRoot(HttpServletRequest request) throws UnsupportedEncodingException {
-        RandomString randomString=new RandomString();
-        String generatedString =randomString.getAlphaNumericString(10);
-        System.out.println(generatedString);
-        return "redirect:/";}
+        System.out.println(servletContext.getRealPath("template/static/uploadfile/"));
+        return "redirect:/";
+    }
+
     @RequestMapping(value = "/test",method = RequestMethod.POST)
     public String test(@RequestParam("file")CommonsMultipartFile file, HttpSession session,HttpServletRequest request){
         imageService.uploadImage(file);
         return "redirect:/";
     }
+
     @RequestMapping(value = "/upfile")
     public String upfile(){
         return "web/test";
     }
+
     @RequestMapping(value = "/profile")
     public ModelAndView profile(Authentication authentication){
         if(authentication!=null){
             MyUser myUser=SecurityUtils.getPrincial();
             System.out.println(myUser.getUser_id());
             ModelAndView mad=new ModelAndView("web/profile");
+            List<devvn_tinhthanhpho> listTinh=tinhService.getAll();
             mad.addObject("userProfile",personService.findById(myUser.getUser_id()));
+            mad.addObject("listT",listTinh);
             return mad;
         }
         return new ModelAndView("redirect:/");
     }
-    @RequestMapping(value = "/manager")
-    public String managerPage(){
-        return "web/manager";
-    }
+
     @RequestMapping(value = "/confirm")
     public String confirmPage(){
         return "web/confirm";
     }
-    @RequestMapping(value = "/registerManager")
-    public String registerManager(Authentication authentication){
-        if(authentication!=null){
-            MyUser myUser=SecurityUtils.getPrincial();
-            Person person=personService.findById(myUser.getUser_id());
-            System.out.println(person.getName());
-            if(registerService.registerManager(person)==true){
-                return "redirect:/manager";
-            }
+
+
+    @RequestMapping(value = "/updateAvatar",method = RequestMethod.POST)
+    public String uploadAvatar(@RequestParam("user_id") Long id,@RequestParam("avatar")CommonsMultipartFile file){
+        if(personService.updateAvatar(id,file)){
+            return "redirect:/profile";
         }
-        return "redirect:/";
+        return "redirect:/profile?error";
+    }
+
+    @RequestMapping(value = "/updateUser",method = RequestMethod.POST)
+    public String updateID(@ModelAttribute("userUpdate")UserUpdateInfor userUpdateInfor){
+        try {
+            personService.updateInformattion(userUpdateInfor);
+            return "redirect:/profile?change=success";
+        } catch (ParseException e) {
+            return "redirect:/profile?profile?change=fail";
+        }
+    }
+
+    @RequestMapping(value = "/changePassword")
+    public ModelAndView changePassword(){
+        ModelAndView modelAndView=new ModelAndView("web/changePassword");
+
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/changePassword/change",method = RequestMethod.POST)
+    public String changePasswordPOST(@ModelAttribute("changePassword")ChangePassword password){
+        ModelAndView modelAndView=new ModelAndView("redirect:/profile");
+        String changePass="";
+        if(personService.changePassword(password)){
+
+            return "redirect:/profile?change=success";
+        }
+
+
+        return "redirect:/profile?change=fail";
     }
 
 

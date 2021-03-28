@@ -44,7 +44,7 @@
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <a class="dropdown-item" href="<c:url value="/profile"/> ">Profile</a>
-                            <a class="dropdown-item" href="#">Another action</a>
+                            <a class="dropdown-item" href="<c:url value="/changePassword" />">Change your password</a>
                             <a class="dropdown-item" href="<c:url value="/j_spring_security_logout"/>">Logout</a>
                         </div>
                     </div>

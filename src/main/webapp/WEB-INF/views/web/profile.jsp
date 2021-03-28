@@ -1,7 +1,24 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@include file="/common/taglib.jsp"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<div class="container">
+<div class="container" style="height: 1000px;">
+    <c:if test="${not empty param.change && param.change.equals('fail')}">
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>Fail!</strong> You should check in on some of those fields below.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </c:if>
+    <c:if test="${not empty param.change && param.change.equals('success')}">
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Done!</strong> Your information have been changed.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </c:if>
     <div class="row my-2">
         <div class="col-lg-8 order-lg-2">
             <ul class="nav nav-tabs">
@@ -17,200 +34,160 @@
             </ul>
             <div class="tab-content py-4">
                 <div class="tab-pane active" id="profile">
-                    <h5 class="mb-3">User Profile</h5>
+                    <h5 class="mb-3"><c:out value="${userProfile.name}"></c:out></h5>
                     <div class="row">
+
                         <div class="col-md-6">
-                            <h6>About</h6>
+                            <h6>Address: </h6>
                             <p>
-                                Web Designer, UI/UX Engineer
+                                ${userProfile.address}
                             </p>
-                            <h6>Hobbies</h6>
+                            <h6>Birthday</h6>
                             <p>
-                                Indie music, skiing and hiking. I love the great outdoors.
+                                <fm:formatDate value="${userProfile.birtday}"></fm:formatDate>
                             </p>
                         </div>
                         <div class="col-md-6">
-                            <h6>Recent badges</h6>
-                            <a href="#" class="badge badge-dark badge-pill">html5</a>
-                            <a href="#" class="badge badge-dark badge-pill">react</a>
-                            <a href="#" class="badge badge-dark badge-pill">codeply</a>
-                            <a href="#" class="badge badge-dark badge-pill">angularjs</a>
-                            <a href="#" class="badge badge-dark badge-pill">css3</a>
-                            <a href="#" class="badge badge-dark badge-pill">jquery</a>
-                            <a href="#" class="badge badge-dark badge-pill">bootstrap</a>
-                            <a href="#" class="badge badge-dark badge-pill">responsive-design</a>
-                            <hr>
-                            <span class="badge badge-primary"><i class="fa fa-user"></i> 900 Followers</span>
-                            <span class="badge badge-success"><i class="fa fa-cog"></i> 43 Forks</span>
-                            <span class="badge badge-danger"><i class="fa fa-eye"></i> 245 Views</span>
+                            <h6>Email:</h6>
+                            <p>${userProfile.mail}</p>
+                            <h6>Gender: </h6>
+                            <p> ${userProfile.gender}</p>
+                            <h6>Phone:</h6>
+                            <p>${userProfile.phone}</p>
+
                         </div>
-                        <div class="col-md-12">
-                            <h5 class="mt-2"><span class="fa fa-clock-o ion-clock float-right"></span> Recent Activity</h5>
-                            <table class="table table-sm table-hover table-striped">
-                                <tbody>
-                                <tr>
-                                    <td>
-                                        <strong>Abby</strong> joined ACME Project Team in <strong>`Collaboration`</strong>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <strong>Gary</strong> deleted My Board1 in <strong>`Discussions`</strong>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <strong>Kensington</strong> deleted MyBoard3 in <strong>`Discussions`</strong>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <strong>John</strong> deleted My Board1 in <strong>`Discussions`</strong>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <strong>Skell</strong> deleted his post Look at Why this is.. in <strong>`Discussions`</strong>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
+
                     </div>
                     <!--/row-->
                 </div>
-                <div class="tab-pane" id="messages">
-                    <div class="alert alert-info alert-dismissable">
-                        <a class="panel-close close" data-dismiss="alert">×</a> This is an <strong>.alert</strong>. Use this to show important messages to the user.
-                    </div>
-                    <table class="table table-hover table-striped">
-                        <tbody>
-                        <tr>
-                            <td>
-                                <span class="float-right font-weight-bold">3 hrs ago</span> Here is your a link to the latest summary report from the..
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <span class="float-right font-weight-bold">Yesterday</span> There has been a request on your account since that was..
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <span class="float-right font-weight-bold">9/10</span> Porttitor vitae ultrices quis, dapibus id dolor. Morbi venenatis lacinia rhoncus.
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <span class="float-right font-weight-bold">9/4</span> Vestibulum tincidunt ullamcorper eros eget luctus.
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <span class="float-right font-weight-bold">9/4</span> Maxamillion ais the fix for tibulum tincidunt ullamcorper eros.
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
+
                 <div class="tab-pane" id="edit">
-                    <form role="form">
+
+                    <form:form role="form" method="post" modelAttribute="userUpdate" action="updateUser">
                         <div class="form-group row">
-                            <label class="col-lg-3 col-form-label form-control-label">First name</label>
+                            <label class="col-lg-3 col-form-label form-control-label">Full name</label>
                             <div class="col-lg-9">
-                                <input class="form-control" type="text" value="Jane">
+                                <input class="form-control" type="text" value="${userProfile.name}" name="fullname">
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label class="col-lg-3 col-form-label form-control-label">Last name</label>
-                            <div class="col-lg-9">
-                                <input class="form-control" type="text" value="Bishop">
+                        <div class="form-input  col-md-6">
+                            <label for="birthday">Birth day</label>
+                            <input class="form-control" type="date" value="${userProfile.birtday.toString()}" id="birthday" name="birthday">
+
+                        </div>
+                        <div class="form-group col-md-6">
+
+                            <p style="color: black">Gender</p>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="Male">
+                                <label class="form-check-label" for="inlineRadio1">Male</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="Female">
+                                <label class="form-check-label" for="inlineRadio2">Female</label>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-lg-3 col-form-label form-control-label">Email</label>
                             <div class="col-lg-9">
-                                <input class="form-control" type="email" value="email@gmail.com">
+                                <input class="form-control" type="email" name="email" value="${userProfile.mail}">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-lg-3 col-form-label form-control-label">Company</label>
+                            <label class="col-lg-3 col-form-label form-control-label">Nationality</label>
                             <div class="col-lg-9">
-                                <input class="form-control" type="text" value="">
+                                <input class="form-control" type="text" name="nationality" value="${userProfile.nationality}">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <div class="form-row">
+                                <div class="form-group col-md-3">
+                                    <label for="inputCity">City/Province</label>
+                                    <select id="inputCity" class="form-control" name="idCity" onchange="addViaAjax()" >
+                                        <option selected>Choose...</option>
+
+                                        <c:forEach items="${listT}" var="t">
+                                            <option value="${t.matp}">${t.name}</option>
+
+
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="inputState">District</label>
+                                    <select id="inputState" class="form-control" onchange="findXa()" name="idDistrict">
+                                        <option selected>Choose...</option>
+
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="inputWard">Ward</label>
+                                    <select id="inputWard" class="form-control" name="idWard">
+                                        <option selected>Choose...</option>
+
+                                    </select>
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label for="inputZip">House number</label>
+                                    <input type="text" class="form-control" id="inputZip" name="houseNumber">
+                                </div>
+
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-lg-3 col-form-label form-control-label">Website</label>
+                            <label class="col-lg-3 col-form-label form-control-label">Phone</label>
                             <div class="col-lg-9">
-                                <input class="form-control" type="url" value="">
+                                    <%--                                <fm:parseDate value="${userProfile.birtday}" var="birthday" pattern="yyyy-MM-dd- HH:mm:ss"/>--%>
+
+                                <input class="form-control" type="text" value="${userProfile.phone}" name="phone">
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label class="col-lg-3 col-form-label form-control-label">Address</label>
-                            <div class="col-lg-9">
-                                <input class="form-control" type="text" value="" placeholder="Street">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-3 col-form-label form-control-label"></label>
-                            <div class="col-lg-6">
-                                <input class="form-control" type="text" value="" placeholder="City">
-                            </div>
-                            <div class="col-lg-3">
-                                <input class="form-control" type="text" value="" placeholder="State">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-3 col-form-label form-control-label">Time Zone</label>
-                            <div class="col-lg-9">
-                                <select id="user_time_zone" class="form-control" size="0">
-                                    <option value="Hawaii">(GMT-10:00) Hawaii</option>
-                                    <option value="Alaska">(GMT-09:00) Alaska</option>
-                                    <option value="Pacific Time (US &amp; Canada)">(GMT-08:00) Pacific Time (US &amp; Canada)</option>
-                                    <option value="Arizona">(GMT-07:00) Arizona</option>
-                                    <option value="Mountain Time (US &amp; Canada)">(GMT-07:00) Mountain Time (US &amp; Canada)</option>
-                                    <option value="Central Time (US &amp; Canada)" selected="selected">(GMT-06:00) Central Time (US &amp; Canada)</option>
-                                    <option value="Eastern Time (US &amp; Canada)">(GMT-05:00) Eastern Time (US &amp; Canada)</option>
-                                    <option value="Indiana (East)">(GMT-05:00) Indiana (East)</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-3 col-form-label form-control-label">Username</label>
-                            <div class="col-lg-9">
-                                <input class="form-control" type="text" value="janeuser">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-3 col-form-label form-control-label">Password</label>
-                            <div class="col-lg-9">
-                                <input class="form-control" type="password" value="11111122333">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-lg-3 col-form-label form-control-label">Confirm password</label>
-                            <div class="col-lg-9">
-                                <input class="form-control" type="password" value="11111122333">
-                            </div>
-                        </div>
+                        <input type="hidden" name="user_id" value="${userProfile.id}">
+                        <input type="hidden" name="address_id" value="${userProfile.address.id}">
+
                         <div class="form-group row">
                             <label class="col-lg-3 col-form-label form-control-label"></label>
                             <div class="col-lg-9">
                                 <input type="reset" class="btn btn-secondary" value="Cancel">
-                                <input type="button" class="btn btn-primary" value="Save Changes">
+                                <input type="submit" class="btn btn-primary" value="Save Changes" >
                             </div>
                         </div>
-                    </form>
+                    </form:form>
                 </div>
             </div>
         </div>
-        <div class="col-lg-4 order-lg-1 text-center">
-            <img src="//placehold.it/150" class="mx-auto img-fluid img-circle d-block" alt="avatar">
+        <div class="col-lg-4 order-lg-1 text-center" style="height: 70px;width: 70px;">
+            <img src="<c:url value="/template/static/uploadfile/${userProfile.image.url}"/>" style="border:solid 1px;border-radius: 100%" class="mx-auto img-fluid img-circle d-block"  alt="avatar">
             <h6 class="mt-2">Upload a different photo</h6>
             <label class="custom-file">
-                <input type="file" id="file" class="custom-file-input">
-                <span class="custom-file-control">Choose file</span>
+               <form:form action="updateAvatar" method="post" enctype="multipart/form-data">
+                   <input type="hidden" value="${userProfile.id}" name="user_id">
+                   <input type="file" id="file-upload" class="custom-file-input" name="avatar">
+                   <span class="custom-file-control">Change Avatar</span>
+                   <input type="submit" class="btn-primary btn" id="change_img" value="Submit" style="display: none">
+                   <div id="file-upload-filename"></div>
+               </form:form>
             </label>
         </div>
     </div>
 </div>
+<script>
+    var input = document.getElementById( 'file-upload' );
+    var infoArea = document.getElementById( 'file-upload-filename' );
+
+    input.addEventListener( 'change', showFileName );
+
+    function showFileName( event ) {
+
+        // the change event gives us the input it occurred in
+        var input = event.srcElement;
+
+        // the input has an array of files in the `files` property, each one has a name that you can use. We're just using the name here.
+        var fileName = input.files[0].name;
+
+        // use fileName however fits your app best, i.e. add it into a div
+        infoArea.textContent = 'File name: ' + fileName;
+        document.getElementById("change_img").style.display="block";
+    }
+</script>

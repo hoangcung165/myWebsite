@@ -3,7 +3,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <div class="container">
-    <form:form action="saveUser" method="post" class="signin-form">
+    <form:form action="saveUser" method="post" class="signin-form" modelAttribute="formRegister">
         <div class="form-group">
             <label for="">Full Name</label>
             <input type="text" class="form-control" id="" placeholder="Your full name" name="fullName">
@@ -100,93 +100,7 @@
 
     </form:form>
 
-    <script
-            src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-    <script>
-        var check = function() {
-            if (document.getElementById('password').value ==
-                document.getElementById('confirm_password').value) {
-                document.getElementById('message').style.color = 'green';
-                document.getElementById('message').innerHTML = 'matching';
-            } else {
-                document.getElementById('message').style.color = 'red';
-                document.getElementById('message').innerHTML = 'not matching';
-            }
-        }
-        var check_agree=function (){
-            if(document.getElementById("gridCheck").checked==true){
-                document.getElementById("submit").disabled=false;
-            }
-            else{
-                document.getElementById("submit").disabled=true;
-            }
-        }
 
-        function addViaAjax() {
-
-            var tinh_id = $("#inputCity").val();
-
-
-            $.ajax({
-                type : "GET",
-                headers : {
-                    Accept : "application/json; charset=utf-8",
-                    "Content-Type" : "application/json; charset=utf-8"
-                },
-                contentType : "application/json",
-                url : "<c:url value="/findHuyen"/>",
-                data : {
-                    tinh_id : tinh_id
-                },
-                dataType : 'json',
-                success : function(result) {
-                    var select=$('#inputState')
-                    $.each(result,function (index,value){
-                        select.append(
-                            $('<option></option>').val(value.id).html(value.name)
-                        )
-                    });
-                },
-                error : function(e) {
-                    console.log("url"+this.url)
-                    console.log("ERROR: ", e);
-                }
-            });
-        }
-        function findXa() {
-
-            var huyen_id = $("#inputState").val();
-
-
-            $.ajax({
-                type : "GET",
-                headers : {
-                    Accept : "application/json; charset=utf-8",
-                    "Content-Type" : "application/json; charset=utf-8"
-                },
-                contentType : "application/json",
-                url : "<c:url value="/findXa"/>",
-                data : {
-                    huyen_id : huyen_id
-                },
-                dataType : 'json',
-                success : function(result) {
-                    var select=$('#inputWard')
-                    $.each(result,function (index,value){
-                        select.append(
-                            $('<option></option>').val(value.id).html(value.name)
-                        )
-                    });
-                },
-                error : function(e) {
-                    console.log("url"+this.url)
-                    console.log("ERROR: ", e);
-                }
-            });
-        }
-
-
-    </script>
 </div>
 
 

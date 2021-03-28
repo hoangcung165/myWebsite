@@ -16,4 +16,10 @@ public class AddressServiceImpl implements AddressService{
     public void save(Address address) {
         addressReposity.save(address);
     }
+
+    @Override
+    public Address findbyId(Long id) {
+        return addressReposity.findById(id).get();
+    }
+
 }
