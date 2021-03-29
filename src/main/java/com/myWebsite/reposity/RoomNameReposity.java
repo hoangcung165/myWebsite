@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface RoomNameReposity extends CrudRepository<RoomName,Long> {
     List<RoomName> findAllByTypeRoom(TypeRoom typeRoom);
+
 }

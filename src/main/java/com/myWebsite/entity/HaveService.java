@@ -16,4 +16,31 @@ public class HaveService {
     @ManyToOne
     @JoinColumn(name = "service_id")
     private Servicehotel servicehotelHave;
+
+    public HaveService() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Apartment getApartmentHave() {
+        return apartmentHave;
+    }
+
+    public void setApartmentHave(Apartment apartmentHave) {
+        this.apartmentHave = apartmentHave;
+    }
+
+    public Servicehotel getServicehotelHave() {
+        return servicehotelHave;
+    }
+
+    public void setServicehotelHave(Servicehotel servicehotelHave) {
+        this.servicehotelHave = servicehotelHave;
+    }
 }

@@ -35,4 +35,12 @@ public class Image {
     public void setUrl(String url) {
         this.url = url;
     }
+
+    public Apartment getApartment_img() {
+        return apartment_img;
+    }
+
+    public void setApartment_img(Apartment apartment_img) {
+        this.apartment_img = apartment_img;
+    }
 }

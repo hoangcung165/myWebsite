@@ -1,6 +1,7 @@
 package com.myWebsite.service;
 
 import com.myWebsite.constant.SystemConstant;
+import com.myWebsite.entity.Apartment;
 import com.myWebsite.entity.Image;
 import com.myWebsite.random.RandomString;
 import com.myWebsite.reposity.ImageRepository;
@@ -55,6 +56,13 @@ public class ImageServiceImpl implements ImageService {
     @Override
     public Image findById(Long id) {
         return repository.findById(id).get();
+    }
+
+    @Override
+    public void uploadForApartment(CommonsMultipartFile file, Apartment apartment) {
+        Image image=uploadImage(file);
+        image.setApartment_img(apartment);
+        repository.save(image);
     }
 
     private String generateNewFileName(){

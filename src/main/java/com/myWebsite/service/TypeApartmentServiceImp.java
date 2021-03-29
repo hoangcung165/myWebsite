@@ -18,4 +18,11 @@ public class TypeApartmentServiceImp implements TypeApartmentService {
     public List<TypeApartment> findAll() {
         return typeApartmentReposity.findAll();
     }
+
+    @Override
+    public TypeApartment findById(Long id) {
+        return typeApartmentReposity.findById(id).get();
+    }
+
+
 }

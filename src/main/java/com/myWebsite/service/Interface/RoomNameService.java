@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface RoomNameService {
     List<RoomName> findByTypeRoom(TypeRoom typeRoom);
+    RoomName findById(Long id);
 }

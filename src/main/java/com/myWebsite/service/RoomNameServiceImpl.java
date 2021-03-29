@@ -19,4 +19,9 @@ public class RoomNameServiceImpl implements RoomNameService {
     public List<RoomName> findByTypeRoom(TypeRoom typeRoom) {
         return roomNameReposity.findAllByTypeRoom(typeRoom);
     }
+
+    @Override
+    public RoomName findById(Long id) {
+        return roomNameReposity.findById(id).get();
+    }
 }

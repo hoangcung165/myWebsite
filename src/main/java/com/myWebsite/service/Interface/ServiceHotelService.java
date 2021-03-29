@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface ServiceHotelService {
     List<Servicehotel> findAll();
+    Servicehotel findById(Long id);
 }

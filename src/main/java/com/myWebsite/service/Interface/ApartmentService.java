@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface ApartmentService {
     List<Apartment> findAllByOwner(Manager manager);
+    boolean save(Apartment apartment);
 }

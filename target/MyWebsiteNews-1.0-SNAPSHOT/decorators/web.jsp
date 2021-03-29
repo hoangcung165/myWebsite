@@ -242,7 +242,7 @@
             });
         }
         function selectRoomname(){
-            if($('#typeRoom').val()=='none') {
+            if($('#typeRoom').val()=='') {
                     $('.selectRoomName').hide();
 
             }

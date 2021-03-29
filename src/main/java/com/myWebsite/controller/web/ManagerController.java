@@ -1,5 +1,6 @@
 package com.myWebsite.controller.web;
 
+import com.myWebsite.dto.HotelRegister;
 import com.myWebsite.dto.MyUser;
 import com.myWebsite.entity.*;
 import com.myWebsite.service.Interface.*;
@@ -7,6 +8,7 @@ import com.myWebsite.utils.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -47,6 +49,9 @@ public class ManagerController {
     private BedService bedService;
     @Autowired
     private ServiceHotelService serviceHotelService;
+
+    @Autowired
+    private SaveNewHotelService saveNewHotelService;
 
     @RequestMapping(value = "/manager")
     public ModelAndView managerPage(){
@@ -94,5 +99,16 @@ public class ManagerController {
         modelAndView.addObject("listService",servicehotelList);
         return modelAndView;
 
+    }
+
+    @RequestMapping(value = "/manager/postNewHotel")
+    public String postNewHotel(@ModelAttribute("newHotel")HotelRegister hotelRegister){
+        System.out.println(hotelRegister.toString());
+        if(saveNewHotelService.saveNewHotel(hotelRegister)){
+            System.out.println("Ok");
+            return "redirect:/";
+        }
+        System.out.println("cc");
+        return "redirect:/";
     }
 }

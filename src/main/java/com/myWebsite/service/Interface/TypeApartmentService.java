@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface TypeApartmentService {
     List<TypeApartment> findAll();
+    TypeApartment findById(Long id);
 }

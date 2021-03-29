@@ -19,4 +19,16 @@ public class ApartmentServiceImpl implements ApartmentService {
     public List<Apartment> findAllByOwner(Manager manager) {
         return reposity.findAllByOwner(manager);
     }
+
+    @Override
+    public boolean save(Apartment apartment) {
+        try{
+            reposity.save(apartment);
+            return true;
+        }
+        catch (Exception e){
+            return false;
+        }
+    }
+
 }
