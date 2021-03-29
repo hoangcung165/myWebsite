@@ -11,7 +11,7 @@ public class Apartment {
     @ManyToOne
     @JoinColumn(name = "typeApartment")
     private TypeApartment typeApartment;
-    private int amount;
+    private int amountRoom;
     @OneToOne
     @JoinColumn(name = "address_id")
     private Address addressApartment;
@@ -35,10 +35,10 @@ public class Apartment {
     public Apartment() {
     }
 
-    public Apartment(Long id, TypeApartment typeApartment, int amount, Address addressApartment, Manager owner, String alternativePhone, String name, List<Room> listRoom, List<Image> imageList, PolicyHotel policyHotel) {
+    public Apartment(Long id, TypeApartment typeApartment, int amountRoom, Address addressApartment, Manager owner, String alternativePhone, String name, List<Room> listRoom, List<Image> imageList, PolicyHotel policyHotel, List<HaveService> haveServiceList) {
         this.id = id;
         this.typeApartment = typeApartment;
-        this.amount = amount;
+        this.amountRoom = amountRoom;
         this.addressApartment = addressApartment;
         this.owner = owner;
         this.alternativePhone = alternativePhone;
@@ -46,6 +46,7 @@ public class Apartment {
         this.listRoom = listRoom;
         this.imageList = imageList;
         this.policyHotel = policyHotel;
+        this.haveServiceList = haveServiceList;
     }
 
     public Long getId() {
@@ -64,12 +65,12 @@ public class Apartment {
         this.typeApartment = typeApartment;
     }
 
-    public int getAmount() {
-        return amount;
+    public int getAmountRoom() {
+        return amountRoom;
     }
 
-    public void setAmount(int amount) {
-        this.amount = amount;
+    public void setAmountRoom(int amountRoom) {
+        this.amountRoom = amountRoom;
     }
 
     public Address getAddressApartment() {

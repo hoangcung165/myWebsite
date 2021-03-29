@@ -1,10 +1,9 @@
 package com.myWebsite.service;
 
 import com.myWebsite.constant.SystemConstant;
-import com.myWebsite.dto.MyUser;
 import com.myWebsite.dto.formRegister;
 import com.myWebsite.entity.*;
-import com.myWebsite.utils.SecurityUtils;
+import com.myWebsite.service.Interface.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -17,7 +16,6 @@ import javax.transaction.Transactional;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 

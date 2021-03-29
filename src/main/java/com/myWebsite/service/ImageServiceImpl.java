@@ -4,12 +4,12 @@ import com.myWebsite.constant.SystemConstant;
 import com.myWebsite.entity.Image;
 import com.myWebsite.random.RandomString;
 import com.myWebsite.reposity.ImageRepository;
+import com.myWebsite.service.Interface.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -18,7 +18,7 @@ import java.io.IOException;
 
 @Service
 @Transactional
-public class ImageServiceImpl implements ImageService{
+public class ImageServiceImpl implements ImageService {
     @Autowired
     private ImageRepository repository;
 

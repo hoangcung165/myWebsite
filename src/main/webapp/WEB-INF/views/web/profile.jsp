@@ -44,7 +44,7 @@
                             </p>
                             <h6>Birthday</h6>
                             <p>
-                                <fm:formatDate value="${userProfile.birtday}"></fm:formatDate>
+                                <fm:formatDate value="${userProfile.birtday}" var="birthday"></fm:formatDate>
                             </p>
                         </div>
                         <div class="col-md-6">
@@ -72,7 +72,7 @@
                         </div>
                         <div class="form-input  col-md-6">
                             <label for="birthday">Birth day</label>
-                            <input class="form-control" type="date" value="${userProfile.birtday.toString()}" id="birthday" name="birthday">
+                            <input class="form-control" type="date" value="${birthday}" id="birthday" name="birthday">
 
                         </div>
                         <div class="form-group col-md-6">

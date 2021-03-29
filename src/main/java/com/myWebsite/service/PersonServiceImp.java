@@ -4,12 +4,11 @@ import com.myWebsite.dto.ChangePassword;
 import com.myWebsite.dto.UserUpdateInfor;
 import com.myWebsite.entity.*;
 import com.myWebsite.reposity.PersonReposity;
+import com.myWebsite.service.Interface.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import javax.transaction.Transactional;
 import java.text.ParseException;
@@ -19,7 +18,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class PersonServiceImp implements PersonService{
+public class PersonServiceImp implements PersonService {
     @Autowired
     private PersonReposity reposity;
     @Autowired
@@ -31,7 +30,7 @@ public class PersonServiceImp implements PersonService{
     private AddressService addressService;
 
     @Autowired
-    private  TinhService tinhService;
+    private TinhService tinhService;
 
     @Autowired
     private HuyenService huyenService;

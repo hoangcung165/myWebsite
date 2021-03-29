@@ -2,8 +2,7 @@ package com.myWebsite.controller.admin;
 
 
 import com.myWebsite.entity.Person;
-import com.myWebsite.service.PersonService;
-import com.myWebsite.utils.SecurityUtils;
+import com.myWebsite.service.Interface.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

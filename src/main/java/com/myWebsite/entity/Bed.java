@@ -9,18 +9,18 @@ public class Bed {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String typeName;
-    private int amount;
 
-    @ManyToOne
-    @JoinColumn(name = "room_id",nullable = false)
-    private Room roomBed;
+
+//    @ManyToOne
+//    @JoinColumn(name = "room_id",nullable = false)
+//    private Room roomBed;
     public Bed() {
     }
 
-    public Bed(Long id, String typeName, int amount) {
+    public Bed(Long id, String typeName) {
         this.id = id;
         this.typeName = typeName;
-        this.amount = amount;
+
     }
 
     public Long getId() {
@@ -39,11 +39,5 @@ public class Bed {
         this.typeName = typeName;
     }
 
-    public int getAmount() {
-        return amount;
-    }
 
-    public void setAmount(int amount) {
-        this.amount = amount;
-    }
 }

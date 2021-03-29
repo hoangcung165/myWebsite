@@ -15,7 +15,7 @@
                 </label>
                 <br>
                 <form action="<c:url value="/registerManager"/>">
-                    <button  class="btn btn-primary" id="submit" onchange="check_agree()" disabled="true">Go somewhere</button>
+                    <button  class="btn btn-primary" id="submit" onchange="check_agree()" disabled="true">Become a Manager</button>
                 </form>
             </div>
             <div class="card-footer text-muted">

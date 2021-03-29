@@ -135,6 +135,8 @@
                 removalDelay: 300,
                 mainClass: 'my-mfp-slide-bottom'
             });
+
+
         });
     </script>
 
@@ -238,6 +240,44 @@
                     console.log("ERROR: ", e);
                 }
             });
+        }
+        function selectRoomname(){
+            if($('#typeRoom').val()=='none') {
+                    $('.selectRoomName').hide();
+
+            }
+            else {
+                var typeRoomId = $("#typeRoom").val();
+                $('.selectRoomName').show();
+
+                $.ajax({
+                    type : "GET",
+                    headers : {
+                        Accept : "application/json; charset=utf-8",
+                        "Content-Type" : "application/json; charset=utf-8"
+                    },
+                    contentType : "application/json",
+                    url : "<c:url value="/findRoomName"/>",
+                    data : {
+                        typeRoomId : typeRoomId
+                    },
+                    dataType : 'json',
+                    success : function(result) {
+                        var select=$('#RoomName')
+                        select.children('option:not(:first)').remove();
+                        $.each(result,function (index,value){
+                            console.log(value.name);
+                            select.append(
+                                $('<option></option>').val(value.id).html(value.name)
+                            )
+                        });
+                    },
+                    error : function(e) {
+                        console.log("url"+this.url)
+                        console.log("ERROR: ", e);
+                    }
+                });
+            }
         }
 
 

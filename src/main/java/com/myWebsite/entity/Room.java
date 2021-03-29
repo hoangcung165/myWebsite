@@ -11,18 +11,18 @@ public class Room extends BaseEntity{
 
     @Column(name = "smoking")
     private String smoking;
-    @Column(name = "amout")
-    private int amout;
-    @Column(name = "maxCustomer")
-    private int maxCustomer;
+
+    private int amout_bed;
+    @Column(name = "quantityCustomer")
+    private int quantityCustomer;
     @Column(name = "size")
     private int size;
     @Column(name = "price")
     private int price;
 //    private String codeSale;
 
-    @OneToMany(mappedBy = "roomBed")
-    private List<Bed> bedList=new ArrayList<>();
+//    @OneToMany(mappedBy = "roomBed")
+//    private List<Bed> bedList=new ArrayList<>();
 
 
     @OneToOne
@@ -36,6 +36,8 @@ public class Room extends BaseEntity{
     @ManyToOne
     @JoinColumn(name = "apartment_id")
     private Apartment apartment;
+
+    private String status;
     public Room() {
     }
     public TypeRoom getTypeRoom() {
@@ -62,20 +64,36 @@ public class Room extends BaseEntity{
         this.smoking = smoking;
     }
 
-    public int getAmout() {
-        return amout;
+    public int getAmout_bed() {
+        return amout_bed;
     }
 
-    public void setAmout(int amout) {
-        this.amout = amout;
+    public void setAmout_bed(int amout_bed) {
+        this.amout_bed = amout_bed;
     }
 
-    public int getMaxCustomer() {
-        return maxCustomer;
+    public int getQuantityCustomer() {
+        return quantityCustomer;
     }
 
-    public void setMaxCustomer(int maxCustomer) {
-        this.maxCustomer = maxCustomer;
+    public void setQuantityCustomer(int quantityCustomer) {
+        this.quantityCustomer = quantityCustomer;
+    }
+
+//    public List<Bed> getBedList() {
+//        return bedList;
+//    }
+//
+//    public void setBedList(List<Bed> bedList) {
+//        this.bedList = bedList;
+//    }
+
+    public Apartment getApartment() {
+        return apartment;
+    }
+
+    public void setApartment(Apartment apartment) {
+        this.apartment = apartment;
     }
 
     public int getSize() {
@@ -92,5 +110,13 @@ public class Room extends BaseEntity{
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

@@ -1,14 +1,12 @@
 package com.myWebsite.controller.web;
 
 
-import com.myWebsite.constant.SystemConstant;
 import com.myWebsite.dto.ChangePassword;
 import com.myWebsite.dto.MyUser;
 import com.myWebsite.dto.UserUpdateInfor;
 import com.myWebsite.dto.formRegister;
 import com.myWebsite.entity.*;
-import com.myWebsite.random.RandomString;
-import com.myWebsite.service.*;
+import com.myWebsite.service.Interface.*;
 import com.myWebsite.utils.SecurityUtils;
 
 import org.springframework.beans.factory.annotation.Autowired;

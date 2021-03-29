@@ -2,6 +2,7 @@ package com.myWebsite.service;
 
 import com.myWebsite.entity.devvn_xaphuongthitran;
 import com.myWebsite.reposity.devvn_xaphuongthitranReposity;
+import com.myWebsite.service.Interface.XaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,7 +11,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class XaServiceImpl implements XaService{
+public class XaServiceImpl implements XaService {
     @Autowired
     devvn_xaphuongthitranReposity reposity;
 

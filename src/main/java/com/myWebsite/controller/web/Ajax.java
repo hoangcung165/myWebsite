@@ -1,28 +1,20 @@
 package com.myWebsite.controller.web;
 
 import com.myWebsite.dto.QuanHuyenDTO;
-import com.myWebsite.dto.TinhDTO;
+import com.myWebsite.dto.RoomNameDTO;
 import com.myWebsite.dto.XaDTO;
+import com.myWebsite.entity.RoomName;
+import com.myWebsite.entity.TypeRoom;
 import com.myWebsite.entity.devvn_quanhuyen;
-import com.myWebsite.entity.devvn_tinhthanhpho;
 import com.myWebsite.entity.devvn_xaphuongthitran;
-import com.myWebsite.service.HuyenService;
-import com.myWebsite.service.TinhService;
-import com.myWebsite.service.XaService;
+import com.myWebsite.service.Interface.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 public class Ajax {
@@ -35,6 +27,11 @@ public class Ajax {
     @Autowired
     private XaService xaService;
 
+    @Autowired
+    private RoomNameService roomNameService;
+
+    @Autowired
+    private TypeRoomService typeRoomService;
 
 
     @GetMapping("/findHuyen")
@@ -74,5 +71,26 @@ public class Ajax {
 
 
         return out;
+    }
+    @GetMapping("/findRoomName")
+    public List<RoomNameDTO> findRoomName(HttpServletRequest request){
+        String typeRoomString=request.getParameter("typeRoomId");
+        Long typeRoomID=Long.parseLong(typeRoomString);
+        TypeRoom typeRoom= typeRoomService.findByID(typeRoomID);
+
+        List<RoomNameDTO> roomNamesDTO=new ArrayList<>();
+        System.out.println(typeRoomString);
+        List<RoomName>roomNames=roomNameService.findByTypeRoom(typeRoom);
+        System.out.println(roomNames.size());
+        for(RoomName roomName:roomNames){
+            RoomNameDTO roomNameDTO=new RoomNameDTO();
+            roomNameDTO.setId(roomName.getId());
+            roomNameDTO.setName(roomName.getName());
+            roomNamesDTO.add(roomNameDTO);
+        }
+        for(RoomNameDTO roomNameDTO:roomNamesDTO){
+            System.out.println(roomNameDTO.getName());
+        }
+        return  roomNamesDTO;
     }
 }
