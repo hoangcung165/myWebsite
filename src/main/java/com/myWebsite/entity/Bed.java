@@ -12,12 +12,16 @@ public class Bed {
 
 
 //    @ManyToOne
-//    @JoinColumn(name = "room_id",nullable = false)
+//    @JoinColumn(name = "room_id")
 //    private Room roomBed;
+    @ManyToOne
+    @JoinColumn(name = "room_id")
+    private Room inRoom;
+
     public Bed() {
     }
 
-    public Bed(Long id, String typeName) {
+    public Bed(Long id, String typeName, Room roomBed) {
         this.id = id;
         this.typeName = typeName;
 

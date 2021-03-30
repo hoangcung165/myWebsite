@@ -58,7 +58,7 @@ public class SaveNewHotelServiceImpl implements SaveNewHotelService {
 
         if(apartmentService.save(apartment)){
             try {
-                setRoom(hotelRegister.getRoomName(), hotelRegister.getTypeRoom(), hotelRegister.getSmokking(), hotelRegister.getQtyBeds(),hotelRegister.getPrice(),hotelRegister.getQty_customer(),apartment);
+                setRoom(hotelRegister.getRoomName(), hotelRegister.getTypeRoom(), hotelRegister.getSmokking(), hotelRegister.getQtyBeds(),hotelRegister.getPrice(),hotelRegister.getQty_customer(),hotelRegister.getQty_room(),apartment);
                 setImageList(hotelRegister.getListImages(),apartment);
                 setService(hotelRegister.getListService(),apartment);
                 return true;
@@ -102,11 +102,11 @@ public class SaveNewHotelServiceImpl implements SaveNewHotelService {
         return typeRoomService.findByID(typeRoomId);
     }
 //    saveRoom
-    private void setRoom(String roomName,String typeRoom,String smoking,int beds,int price,int qty_customer,Apartment apartment){
+    private void setRoom(String roomName,String typeRoom,String smoking,int beds,int price,int qty_customer,int quantity_rooms,Apartment apartment){
 
         Room room=new Room();
         room.setSmoking(smoking);
-        room.setAmout_bed(beds);
+        room.setAmount_bed(beds);
         room.setQuantityCustomer(qty_customer);
         room.setPrice(price);
         room.setTypeRoom(getTypeRoom(typeRoom));

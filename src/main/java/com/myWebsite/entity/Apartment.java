@@ -8,22 +8,29 @@ public class Apartment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @ManyToOne
     @JoinColumn(name = "typeApartment")
     private TypeApartment typeApartment;
-    private int amountRoom;
+
     @OneToOne
     @JoinColumn(name = "address_id")
     private Address addressApartment;
+
     @ManyToOne
     @JoinColumn(name = "owner_id")
     private Manager owner;
+
     private String alternativePhone; //số điện thoại thay thế
+
     private String name;
+
     @OneToMany(mappedBy = "apartment")
     private List<Room> listRoom;
+
     @OneToMany(mappedBy = "apartment_img")
     private List<Image> imageList;
+
     @OneToOne
     @JoinColumn(name = "policy_id")
     private PolicyHotel policyHotel;
@@ -35,10 +42,9 @@ public class Apartment {
     public Apartment() {
     }
 
-    public Apartment(Long id, TypeApartment typeApartment, int amountRoom, Address addressApartment, Manager owner, String alternativePhone, String name, List<Room> listRoom, List<Image> imageList, PolicyHotel policyHotel, List<HaveService> haveServiceList) {
+    public Apartment(Long id, TypeApartment typeApartment, Address addressApartment, Manager owner, String alternativePhone, String name, List<Room> listRoom, List<Image> imageList, PolicyHotel policyHotel, List<HaveService> haveServiceList) {
         this.id = id;
         this.typeApartment = typeApartment;
-        this.amountRoom = amountRoom;
         this.addressApartment = addressApartment;
         this.owner = owner;
         this.alternativePhone = alternativePhone;
@@ -65,13 +71,8 @@ public class Apartment {
         this.typeApartment = typeApartment;
     }
 
-    public int getAmountRoom() {
-        return amountRoom;
-    }
 
-    public void setAmountRoom(int amountRoom) {
-        this.amountRoom = amountRoom;
-    }
+
 
     public Address getAddressApartment() {
         return addressApartment;

@@ -12,7 +12,8 @@ public class Room extends BaseEntity{
     @Column(name = "smoking")
     private String smoking;
 
-    private int amout_bed;
+    private int amount_bed;
+    private int quantity_rooms;
     @Column(name = "quantityCustomer")
     private int quantityCustomer;
     @Column(name = "size")
@@ -21,8 +22,9 @@ public class Room extends BaseEntity{
     private int price;
 //    private String codeSale;
 
-//    @OneToMany(mappedBy = "roomBed")
-//    private List<Bed> bedList=new ArrayList<>();
+    @OneToMany(mappedBy = "inRoom")
+    private List<Bed> bedList=new ArrayList<>();
+
 
 
     @OneToOne
@@ -40,6 +42,21 @@ public class Room extends BaseEntity{
     private String status;
     public Room() {
     }
+
+    public Room(String smoking, int amount_bed, int quantity_rooms, int quantityCustomer, int size, int price, List<Bed> bedList, TypeRoom typeRoom, RoomName roomName, Apartment apartment, String status) {
+        this.smoking = smoking;
+        this.amount_bed = amount_bed;
+        this.quantity_rooms = quantity_rooms;
+        this.quantityCustomer = quantityCustomer;
+        this.size = size;
+        this.price = price;
+        this.bedList = bedList;
+        this.typeRoom = typeRoom;
+        this.roomName = roomName;
+        this.apartment = apartment;
+        this.status = status;
+    }
+
     public TypeRoom getTypeRoom() {
         return typeRoom;
     }
@@ -64,12 +81,20 @@ public class Room extends BaseEntity{
         this.smoking = smoking;
     }
 
-    public int getAmout_bed() {
-        return amout_bed;
+    public int getAmount_bed() {
+        return amount_bed;
     }
 
-    public void setAmout_bed(int amout_bed) {
-        this.amout_bed = amout_bed;
+    public void setAmount_bed(int amount_bed) {
+        this.amount_bed = amount_bed;
+    }
+
+    public int getQuantity_rooms() {
+        return quantity_rooms;
+    }
+
+    public void setQuantity_rooms(int quantity_rooms) {
+        this.quantity_rooms = quantity_rooms;
     }
 
     public int getQuantityCustomer() {
@@ -118,5 +143,13 @@ public class Room extends BaseEntity{
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public List<Bed> getBedList() {
+        return bedList;
+    }
+
+    public void setBedList(List<Bed> bedList) {
+        this.bedList = bedList;
     }
 }
