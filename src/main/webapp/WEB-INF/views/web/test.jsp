@@ -1,6 +1,6 @@
 <%@include file="/common/taglib.jsp"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<form action="test" method="post" enctype="multipart/form-data">
+<form action="booking" method="post" enctype="multipart/form-data">
     <textarea id="editor" name="detail" style="height: 50px" ></textarea>
     <input type="submit" value="Upload File"/>
 

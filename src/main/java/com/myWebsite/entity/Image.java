@@ -14,7 +14,7 @@ public class Image {
 
     @ManyToOne
     @JoinColumn(name = "apartment_id")
-    private Apartment apartment_img;
+    private Apartment apartmentImg;
 
 
     public Image() {
@@ -36,11 +36,11 @@ public class Image {
         this.url = url;
     }
 
-    public Apartment getApartment_img() {
-        return apartment_img;
+    public Apartment getApartmentImg() {
+        return apartmentImg;
     }
 
-    public void setApartment_img(Apartment apartment_img) {
-        this.apartment_img = apartment_img;
+    public void setApartmentImg(Apartment apartmentImg) {
+        this.apartmentImg = apartmentImg;
     }
 }

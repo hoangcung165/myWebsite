@@ -49,6 +49,10 @@ public class HomeController {
     private ImageService imageService;
     @Autowired
     private ApartmentService apartmentService;
+    @Autowired
+    private RoomService roomService;
+    @Autowired
+    private HaveServiceS haveServiceS;
 
 
     @RequestMapping(value = "/home",method = RequestMethod.GET)
@@ -126,9 +130,9 @@ public class HomeController {
 
     }
 
-    @RequestMapping(value = "/testRoot")
-    public String testRoot(HttpServletRequest request) throws UnsupportedEncodingException {
-        System.out.println(servletContext.getRealPath("template/static/uploadfile/"));
+    @GetMapping(value = "/testRoot")
+    public String testRoot(@SessionAttribute("booking") String booking)  {
+        System.out.println(booking);
         return "redirect:/";
     }
 
@@ -210,6 +214,25 @@ public class HomeController {
         return modelAndView;
     }
 //    public
+    @RequestMapping(value = "getDetail/{id}")
+    public ModelAndView viewDetail(@PathVariable("id") String id){
+        Long id_hotel=Long.parseLong(id);
+        Apartment apartment=apartmentService.findById(id_hotel);
+        List<Image> imageList=imageService.findAllByApartmentId(id_hotel);
+        List<Room> rooms=roomService.findAllbyApartId(id_hotel);
+        List<HaveService> haveServiceList=haveServiceS.findAllByApartmentID(id_hotel);
+        System.out.println(id);
+        ModelAndView modelAndView=new ModelAndView("web/detail");
+        modelAndView.addObject("apartment",apartment);
+        modelAndView.addObject("imgs",imageList);
+        modelAndView.addObject("rooms",rooms);
+        modelAndView.addObject("services",haveServiceList);
+        return  modelAndView;
+    }
+    @RequestMapping(value = "/toBooking")
+    public String toBooking(){
+        return "web/test";
+    }
 
 
 }

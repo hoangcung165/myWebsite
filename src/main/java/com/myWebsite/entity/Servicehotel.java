@@ -19,9 +19,11 @@ public class Servicehotel extends BaseEntity{
     public Servicehotel() {
     }
 
-    public Servicehotel(Long id, String detail) {
+    public Servicehotel(Long id, String detail, String icon, List<HaveService> haveService) {
         this.id = id;
         this.detail = detail;
+        this.icon = icon;
+        this.haveService = haveService;
     }
 
     @Override
@@ -47,5 +49,13 @@ public class Servicehotel extends BaseEntity{
 
     public void setHaveService(List<HaveService> haveService) {
         this.haveService = haveService;
+    }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 }

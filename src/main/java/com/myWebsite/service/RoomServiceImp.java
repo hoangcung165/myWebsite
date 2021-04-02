@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 @Transactional
@@ -16,6 +17,11 @@ public class RoomServiceImp implements RoomService {
     @Override
     public Room save(Room room) {
         return roomReposity.save(room);
+    }
+
+    @Override
+    public List<Room> findAllbyApartId(Long id) {
+        return roomReposity.findRoomsByApartment_Id(id);
     }
 
 }

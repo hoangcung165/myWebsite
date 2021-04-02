@@ -28,8 +28,8 @@ public class Apartment {
     @OneToMany(mappedBy = "apartment")
     private List<Room> listRoom;
 
-    @OneToMany(mappedBy = "apartment_img")
-    private List<Image> imageList;
+    @OneToMany(mappedBy = "apartmentImg")
+    private List<Image> imgApartment;
 
     @OneToOne
     private Image logo;
@@ -51,7 +51,7 @@ public class Apartment {
     public Apartment() {
     }
 
-    public Apartment(Long id, TypeApartment typeApartment, Address addressApartment, Manager owner, String alternativePhone, String name, List<Room> listRoom, List<Image> imageList, Image logo, PolicyHotel policyHotel, List<HaveService> haveServiceList, String shotDescribe, String detailDescribe) {
+    public Apartment(Long id, TypeApartment typeApartment, Address addressApartment, Manager owner, String alternativePhone, String name, List<Room> listRoom, List<Image> imgApartment, Image logo, PolicyHotel policyHotel, List<HaveService> haveServiceList, String shotDescribe, String detailDescribe) {
         this.id = id;
         this.typeApartment = typeApartment;
         this.addressApartment = addressApartment;
@@ -59,7 +59,7 @@ public class Apartment {
         this.alternativePhone = alternativePhone;
         this.name = name;
         this.listRoom = listRoom;
-        this.imageList = imageList;
+        this.imgApartment = imgApartment;
         this.logo = logo;
         this.policyHotel = policyHotel;
         this.haveServiceList = haveServiceList;
@@ -126,12 +126,12 @@ public class Apartment {
         this.listRoom = listRoom;
     }
 
-    public List<Image> getImageList() {
-        return imageList;
+    public List<Image> getImgApartment() {
+        return imgApartment;
     }
 
-    public void setImageList(List<Image> imageList) {
-        this.imageList = imageList;
+    public void setImgApartment(List<Image> imgApartment) {
+        this.imgApartment = imgApartment;
     }
 
     public PolicyHotel getPolicyHotel() {

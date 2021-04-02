@@ -42,7 +42,7 @@
                             </p>
                             <h6>Birthday</h6>
                             <p>
-                                <fm:formatDate value="${userProfile.birtday}" var="birthday"></fm:formatDate>
+                               <fm:formatDate value="${userProfile.birtday}"/>
                             </p>
                         </div>
                         <div class="col-md-6">
@@ -70,20 +70,33 @@
                         </div>
                         <div class="form-input  col-md-6">
                             <label for="birthday">Birth day</label>
-                            <input class="form-control" type="date" value="${birthday}" id="birthday" name="birthday">
+                            <input class="form-control" type="date" value="<fm:formatDate value="${userProfile.birtday}" pattern="yyyy-MM-dd"/>" id="birthday" name="birthday">
 
                         </div>
                         <div class="form-group col-md-6">
 
                             <p style="color: black">Gender</p>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="Male">
-                                <label class="form-check-label" for="inlineRadio1">Male</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="Female">
-                                <label class="form-check-label" for="inlineRadio2">Female</label>
-                            </div>
+                            <c:if test="${userProfile.gender.equalsIgnoreCase('male')}">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="Male" checked="true">
+                                    <label class="form-check-label" for="inlineRadio1">Male</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="Female">
+                                    <label class="form-check-label" for="inlineRadio2">Female</label>
+                                </div>
+                            </c:if>
+                            <c:if test="${!userProfile.gender.equalsIgnoreCase('male')}">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="Male" >
+                                    <label class="form-check-label" for="inlineRadio1">Male</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="Female" checked="true">
+                                    <label class="form-check-label" for="inlineRadio2">Female</label>
+                                </div>
+                            </c:if>
+
                         </div>
                         <div class="form-group row">
                             <label class="col-lg-3 col-form-label form-control-label">Email</label>
@@ -98,12 +111,14 @@
                             </div>
                         </div>
 
+
                         <div class="form-group row">
                             <div class="form-row">
+
                                 <div class="form-group col-md-3">
                                     <label for="inputCity">City/Province</label>
                                     <select id="inputCity" class="form-control" name="idCity" onchange="addViaAjax()" >
-                                        <option selected>Choose...</option>
+                                        <option value="${userProfile.address.tinhthanhphoAddress.matp}" selected>${userProfile.address.tinhthanhphoAddress.name}</option>
 
                                         <c:forEach items="${listT}" var="t">
                                             <option value="${t.matp}">${t.name}</option>
@@ -115,20 +130,20 @@
                                 <div class="form-group col-md-3">
                                     <label for="inputState">District</label>
                                     <select id="inputState" class="form-control" onchange="findXa()" name="idDistrict">
-                                        <option selected>Choose...</option>
+                                        <option selected value="${userProfile.address.quanhuyenAddress.maqh}">${userProfile.address.quanhuyenAddress.name}</option>
 
                                     </select>
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label for="inputWard">Ward</label>
                                     <select id="inputWard" class="form-control" name="idWard">
-                                        <option selected>Choose...</option>
+                                        <option selected value="${userProfile.address.xaphuongthitranAddress.xaid}">${userProfile.address.xaphuongthitranAddress.name}</option>
 
                                     </select>
                                 </div>
                                 <div class="form-group col-md-2">
                                     <label for="inputZip">House number</label>
-                                    <input type="text" class="form-control" id="inputZip" name="houseNumber">
+                                    <input type="text" class="form-control" id="inputZip" name="houseNumber" value="${userProfile.address.houseNum}">
                                 </div>
 
                             </div>
@@ -156,7 +171,7 @@
             </div>
         </div>
         <div class="col-lg-4 order-lg-1 text-center" style="height: 70px;width: 70px;">
-            <img src="<c:url value="/template/static/uploadfile/${userProfile.image.url}"/>" style="border:solid 1px;border-radius: 100%" class="mx-auto img-fluid img-circle d-block rounded-circle"  alt="avatar">
+            <img src="<c:url value="/template/static/uploadfile/${userProfile.image.url}"/>" style="height:250px;width:250px" class="mx-auto img-fluid img-circle d-block rounded-circle"  alt="avatar">
             <h6 class="mt-2">Upload a different photo</h6>
             <label class="custom-file">
                <form:form action="updateAvatar" method="post" enctype="multipart/form-data">

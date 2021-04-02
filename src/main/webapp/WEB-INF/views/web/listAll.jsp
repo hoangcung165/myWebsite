@@ -10,11 +10,13 @@
 <div class="container">
     
    <div class="row">
-
-       <div class="col">
-           <%@include file="/common/web/formBooking.jsp"%>
+        <%@include file="/common/web/formBooking.jsp"%>
+       <div class="col-3">
+           <c:if test="${sessionScope.booking==null}">
+               <%@include file="formSearch.jsp"%>
+           </c:if>
        </div>
-       <div class="col-8">
+       <div class="col-9">
            <ul class="list-group">
                <c:forEach var="apartment" items="${listApartment}">
                    <li class="list-group-item">
@@ -24,10 +26,10 @@
                            <div class="card-body">
                                <h5 class="card-title">${apartment.name}</h5>
                                <p class="card-text">${apartment.shotDescribe}</p>
-                               <br>
-                               <p class="card-text">Adress: ${apartment.addressApartment}</p>
 
-                               <a href=""  class="btn btn-primary">Details</a>
+                               <p class="card-text text-info"><i class="fas fa-place-of-worship"></i> Adress: ${apartment.addressApartment}</p>
+
+                               <a href="<c:url value="/getDetail/${apartment.id}"/> "  class="btn btn-primary">Details</a>
                            </div>
                        </div>
                    </li>

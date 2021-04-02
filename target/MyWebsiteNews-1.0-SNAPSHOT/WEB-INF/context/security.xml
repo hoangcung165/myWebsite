@@ -10,6 +10,8 @@
 
         <intercept-url pattern="/admin**" access="hasAnyRole('ROLE_ADMIN')" />
         <intercept-url pattern="/manager**" access="hasAnyRole('ROLE_ADMIN','ROLE_MANAGER')"/>
+        <intercept-url pattern="/toBooking**" access="hasAnyRole('ROLE_ADMIN','ROLE_MANAGER','ROLE_USER')"/>
+
         <access-denied-handler error-page="/accessDenied?denied"/>
         <form-login
                 login-page="/login"

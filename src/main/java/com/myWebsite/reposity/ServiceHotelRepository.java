@@ -10,4 +10,6 @@ import java.util.List;
 public interface ServiceHotelRepository extends JpaRepository<Servicehotel,Long> {
     Servicehotel findAllByHaveService(HaveService haveService);
 
+
+
 }

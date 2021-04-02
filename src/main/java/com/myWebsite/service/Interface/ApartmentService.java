@@ -9,4 +9,5 @@ public interface ApartmentService {
     List<Apartment> findAllByOwner(Manager manager);
     boolean save(Apartment apartment);
     List<Apartment> findAll();
+    Apartment findById(Long id);
 }

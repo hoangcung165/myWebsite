@@ -16,6 +16,7 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.List;
 
 @Service
 @Transactional
@@ -61,9 +62,15 @@ public class ImageServiceImpl implements ImageService {
     @Override
     public void uploadForApartment(CommonsMultipartFile file, Apartment apartment) {
         Image image=uploadImage(file);
-        image.setApartment_img(apartment);
+        image.setApartmentImg(apartment);
         repository.save(image);
     }
+
+    @Override
+    public List<Image> findAllByApartmentId(Long id) {
+        return repository.findImagesByApartmentImg_Id(id);
+    }
+
 
     private String generateNewFileName(){
         RandomString randomString=new RandomString();
