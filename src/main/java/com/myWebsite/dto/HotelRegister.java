@@ -24,11 +24,14 @@ public class HotelRegister {
     private int price;
     private List<String> listService;
     private List<CommonsMultipartFile> listImages;
+    private CommonsMultipartFile logo;
+    private String shortDes;
+    private String detail;
 
     public HotelRegister() {
     }
 
-    public HotelRegister(String typeApartment, String name, String id_user, String idCity, String idDistrict, String idWard, String houseNumber, String typeRoom, String roomName, String smokking, String kindOfBed, int qtyBeds, int qty_customer, int qty_room, int size, int price, List<String> listService, List<CommonsMultipartFile> listImages) {
+    public HotelRegister(String typeApartment, String name, String id_user, String idCity, String idDistrict, String idWard, String houseNumber, String typeRoom, String roomName, String smokking, String kindOfBed, int qtyBeds, int qty_customer, int qty_room, int size, int price, List<String> listService, List<CommonsMultipartFile> listImages, CommonsMultipartFile logo, String shortDes, String detail) {
         this.typeApartment = typeApartment;
         this.name = name;
         this.id_user = id_user;
@@ -47,27 +50,9 @@ public class HotelRegister {
         this.price = price;
         this.listService = listService;
         this.listImages = listImages;
-    }
-
-    public HotelRegister(String typeApartment, String name, String id_user, String idCity, String idDistrict, String idWard, String houseNumber, String typeRoom, String roomName, String smokking, String kindOfBed, int qtyBeds, int qty_customer, int qty_room, int size, int price, List<String> listService) {
-        this.typeApartment = typeApartment;
-        this.name = name;
-        this.id_user = id_user;
-        this.idCity = idCity;
-        this.idDistrict = idDistrict;
-        this.idWard = idWard;
-        this.houseNumber = houseNumber;
-        this.typeRoom = typeRoom;
-        this.roomName = roomName;
-        this.smokking = smokking;
-        this.kindOfBed = kindOfBed;
-        this.qtyBeds = qtyBeds;
-        this.qty_customer = qty_customer;
-        this.qty_room = qty_room;
-        this.size = size;
-        this.price = price;
-        this.listService = listService;
-
+        this.logo = logo;
+        this.shortDes = shortDes;
+        this.detail = detail;
     }
 
     public String getTypeApartment() {
@@ -212,6 +197,30 @@ public class HotelRegister {
 
     public void setListImages(List<CommonsMultipartFile> listImages) {
         this.listImages = listImages;
+    }
+
+    public CommonsMultipartFile getLogo() {
+        return logo;
+    }
+
+    public void setLogo(CommonsMultipartFile logo) {
+        this.logo = logo;
+    }
+
+    public String getShortDes() {
+        return shortDes;
+    }
+
+    public void setShortDes(String shortDes) {
+        this.shortDes = shortDes;
+    }
+
+    public String getDetail() {
+        return detail;
+    }
+
+    public void setDetail(String detail) {
+        this.detail = detail;
     }
 
     @Override

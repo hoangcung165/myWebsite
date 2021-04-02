@@ -11,6 +11,7 @@ public class Servicehotel extends BaseEntity{
     private Long id;
 
     private String detail;
+    private String icon;
 
     @OneToMany(mappedBy = "servicehotelHave")
     private List<HaveService> haveService;

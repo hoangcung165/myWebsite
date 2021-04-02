@@ -31,4 +31,10 @@ public class ApartmentServiceImpl implements ApartmentService {
         }
     }
 
+    @Override
+    public List<Apartment> findAll() {
+        return reposity.findAll();
+    }
+
+
 }

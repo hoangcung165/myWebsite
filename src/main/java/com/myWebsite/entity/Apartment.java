@@ -32,6 +32,9 @@ public class Apartment {
     private List<Image> imageList;
 
     @OneToOne
+    private Image logo;
+
+    @OneToOne
     @JoinColumn(name = "policy_id")
     private PolicyHotel policyHotel;
 
@@ -39,10 +42,16 @@ public class Apartment {
     @OneToMany(mappedBy = "apartmentHave")
     private  List<HaveService> haveServiceList;
 
+
+    private String shotDescribe;
+
+    @Column(columnDefinition = "TEXT")
+    private String detailDescribe;
+
     public Apartment() {
     }
 
-    public Apartment(Long id, TypeApartment typeApartment, Address addressApartment, Manager owner, String alternativePhone, String name, List<Room> listRoom, List<Image> imageList, PolicyHotel policyHotel, List<HaveService> haveServiceList) {
+    public Apartment(Long id, TypeApartment typeApartment, Address addressApartment, Manager owner, String alternativePhone, String name, List<Room> listRoom, List<Image> imageList, Image logo, PolicyHotel policyHotel, List<HaveService> haveServiceList, String shotDescribe, String detailDescribe) {
         this.id = id;
         this.typeApartment = typeApartment;
         this.addressApartment = addressApartment;
@@ -51,8 +60,11 @@ public class Apartment {
         this.name = name;
         this.listRoom = listRoom;
         this.imageList = imageList;
+        this.logo = logo;
         this.policyHotel = policyHotel;
         this.haveServiceList = haveServiceList;
+        this.shotDescribe = shotDescribe;
+        this.detailDescribe = detailDescribe;
     }
 
     public Long getId() {
@@ -136,5 +148,29 @@ public class Apartment {
 
     public void setHaveServiceList(List<HaveService> haveServiceList) {
         this.haveServiceList = haveServiceList;
+    }
+
+    public Image getLogo() {
+        return logo;
+    }
+
+    public void setLogo(Image logo) {
+        this.logo = logo;
+    }
+
+    public String getShotDescribe() {
+        return shotDescribe;
+    }
+
+    public void setShotDescribe(String shotDescribe) {
+        this.shotDescribe = shotDescribe;
+    }
+
+    public String getDetailDescribe() {
+        return detailDescribe;
+    }
+
+    public void setDetailDescribe(String detailDescribe) {
+        this.detailDescribe = detailDescribe;
     }
 }

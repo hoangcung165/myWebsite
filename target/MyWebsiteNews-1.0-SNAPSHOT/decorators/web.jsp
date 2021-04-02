@@ -22,7 +22,7 @@
 </head>
 <body>
     <%@include file="/common/web/header.jsp"%>
-    <%@include file="/common/web/silde.jsp"%>
+
 
     <dec:body></dec:body>
 

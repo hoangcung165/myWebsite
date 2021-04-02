@@ -1,70 +1,30 @@
 <%@include file="/common/taglib.jsp"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<section class="w3l-main-slider" id="home">
-    <div class="companies20-content">
-        <div class="owl-one owl-carousel owl-theme">
-            <div class="item">
-                <li>
-                    <div class="slider-info banner-view bg bg2">
-                        <div class="banner-info">
-                            <div class="container">
-                                <div class="banner-info-bg">
-                                    <h5>Location is heavenly. Best to visit in week days to enjoy the peaceful beauty
-                                    </h5>
-                                    <a class="btn btn-style transparent-btn mt-sm-5 mt-4" href="services.html"> Our
-                                        Services</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
+<div class="container-fluid">
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner" style="height: 800px">
+            <div class="carousel-item active">
+                <img class="d-block w-100" src="<c:url value="/template/web/assets/images/slide1.jpg"/>" style="width: 100%;height: 100%;object-fit: cover" alt="First slide">
             </div>
-            <div class="item">
-                <li>
-                    <div class="slider-info  banner-view banner-top1 bg bg2">
-                        <div class="banner-info">
-                            <div class="container">
-                                <div class="banner-info-bg">
-                                    <h5>Our new hotels will play a leading role in prompting the world peace.</h5>
-                                    <a class="btn btn-style transparent-btn mt-sm-5 mt-4" href="services.html"> Our
-                                        Services</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
+            <div class="carousel-item">
+                <img class="d-block w-100"  src="<c:url value="/template/web/assets/images/slide2.jpg"/>" style="width: 100%;height: 100%;object-fit: cover" alt="Second slide">
             </div>
-            <div class="item">
-                <li>
-                    <div class="slider-info banner-view banner-top2 bg bg2">
-                        <div class="banner-info">
-                            <div class="container">
-                                <div class="banner-info-bg">
-                                    <h5>Most hotels train their people with the booklets. We take ours to the ballet.
-                                    </h5>
-                                    <a class="btn btn-style transparent-btn mt-sm-5 mt-4" href="services.html"> Our
-                                        Services</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-            </div>
-            <div class="item">
-                <li>
-                    <div class="slider-info banner-view banner-top3 bg bg2">
-                        <div class="banner-info">
-                            <div class="container">
-                                <div class="banner-info-bg">
-                                    <h5>Good tourism will follow good hotels. Experience our luxury hotel rooms</h5>
-                                    <a class="btn btn-style transparent-btn mt-sm-5 mt-4" href="services.html"> Our
-                                        Services</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
+            <div class="carousel-item">
+                <img class="d-block w-100"  src="<c:url value="/template/web/assets/images/slide3.jpg"/>"style="width: 100%;height: 100%;object-fit: cover" alt="Third slide">
             </div>
         </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
     </div>
-</section>
+</div>

@@ -55,12 +55,15 @@ public class SaveNewHotelServiceImpl implements SaveNewHotelService {
         apartment.setName(hotelRegister.getName());
         apartment.setOwner(getManager(hotelRegister.getId_user()));
         apartment.setTypeApartment(getTypeApartment(hotelRegister.getTypeApartment()));
+        apartment.setDetailDescribe(hotelRegister.getDetail());
+        apartment.setShotDescribe(hotelRegister.getShortDes());
 
         if(apartmentService.save(apartment)){
             try {
                 setRoom(hotelRegister.getRoomName(), hotelRegister.getTypeRoom(), hotelRegister.getSmokking(), hotelRegister.getQtyBeds(),hotelRegister.getPrice(),hotelRegister.getQty_customer(),hotelRegister.getQty_room(),apartment);
                 setImageList(hotelRegister.getListImages(),apartment);
                 setService(hotelRegister.getListService(),apartment);
+                setLogo(hotelRegister.getLogo(), apartment);
                 return true;
             }
             catch (Exception e){
@@ -111,6 +114,7 @@ public class SaveNewHotelServiceImpl implements SaveNewHotelService {
         room.setPrice(price);
         room.setTypeRoom(getTypeRoom(typeRoom));
         room.setRoomName(getRoomName(roomName));
+        room.setQuantity_rooms(quantity_rooms);
         room.setApartment(apartment);
         roomService.save(room);
 
@@ -130,6 +134,10 @@ public class SaveNewHotelServiceImpl implements SaveNewHotelService {
             haveService.setServicehotelHave(servicehotel);
             haveServiceS.save(haveService);
         }
+    }
+    private void setLogo(CommonsMultipartFile file,Apartment apartment){
+        Image image=imageService.uploadImage(file);
+        apartment.setLogo(image);
     }
 
 }

@@ -25,9 +25,7 @@
                 <li class="nav-item">
                     <a href="" data-target="#profile" data-toggle="tab" class="nav-link active">Profile</a>
                 </li>
-                <li class="nav-item">
-                    <a href="" data-target="#messages" data-toggle="tab" class="nav-link">Messages</a>
-                </li>
+
                 <li class="nav-item">
                     <a href="" data-target="#edit" data-toggle="tab" class="nav-link">Edit</a>
                 </li>
@@ -158,7 +156,7 @@
             </div>
         </div>
         <div class="col-lg-4 order-lg-1 text-center" style="height: 70px;width: 70px;">
-            <img src="<c:url value="/template/static/uploadfile/${userProfile.image.url}"/>" style="border:solid 1px;border-radius: 100%" class="mx-auto img-fluid img-circle d-block"  alt="avatar">
+            <img src="<c:url value="/template/static/uploadfile/${userProfile.image.url}"/>" style="border:solid 1px;border-radius: 100%" class="mx-auto img-fluid img-circle d-block rounded-circle"  alt="avatar">
             <h6 class="mt-2">Upload a different photo</h6>
             <label class="custom-file">
                <form:form action="updateAvatar" method="post" enctype="multipart/form-data">

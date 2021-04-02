@@ -25,7 +25,7 @@
                         <a class="nav-link h2" href="about.html">About</a>
                     </li>
                     <li class="nav-item @@services__active">
-                        <a class="nav-link h2" href="services.html">Services</a>
+                        <a class="nav-link h2" href="">All</a>
                     </li>
                     <li class="nav-item @@contact__active">
                         <a class="nav-link h2" href="contact.html">Contact</a>

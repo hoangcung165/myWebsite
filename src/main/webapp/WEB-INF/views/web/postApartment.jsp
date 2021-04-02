@@ -46,6 +46,10 @@
         line-height: 1.428571429;
         border-radius: 15px;
     }
+    .ck-editor__editable {
+        min-height: 300px;
+        max-width: 700px;
+    }
 </style>
 <div class="container"></div>,<div class="container">
 
@@ -86,9 +90,13 @@
                         <label class="control-label">Name</label>
                         <input maxlength="100" type="text" required="required" class="form-control" placeholder="Enter Name" name="name">
                     </div>
+                    <h5>Logo</h5>
+                    <div class="form-group" style="border: whitesmoke 1px solid;border-radius: 2px">
+                        <input id="file-input_logo" type="file" multiple name="logo">
+                        <div id="show_img"></div>
+                    </div>
                     <h4>User</h4>
                     <div class="row">
-
 
                         <div class="form-group col-md-6">
                             <label class="control-label">User Name</label>
@@ -111,8 +119,6 @@
 
                                     <c:forEach items="${listT}" var="t">
                                         <option value="${t.matp}">${t.name}</option>
-
-
                                     </c:forEach>
                                 </select>
                             </div>
@@ -157,8 +163,8 @@
                             </c:forEach>
                         </select>
                     </div>
-                    <hr>
                     <div class="form-group selectRoomName">
+                        <hr>
                         <label for="RoomName">Room Name</label>
                         <select id="RoomName" class="form-control" name="RoomName" >
                             <option selected value="''">Choose...</option>
@@ -174,6 +180,7 @@
                         </select>
                     </div>
                     <hr>
+
                     <div class="form-group" >
                         <h3>Bed Options</h3>
                         <label for="kindOfBed">Kind of beds</label>
@@ -183,6 +190,7 @@
                                 <option value="${bed.id}">${bed.typeName}</option>
                             </c:forEach>
                         </select>
+                        <br>
                         <label for="qtyBeds">Quantity of beds</label>
                         <input type="number" class="form-control  col-md-3" id="qtyBeds" name="qtyBeds">
                     </div>
@@ -194,12 +202,15 @@
                     <div class="form-group row">
                         <label for="amount">Quantity rooms</label>
                         <input type="number" class="form-control col-md-2" id="amount" name="qty_room" >
-                        <span class="col-md-3"></span>
+                    </div>
+                    <hr>
+                    <div class="form-group row">
                         <label for="size">Room Size (M2)</label>
                         <input type="number" class="form-control  col-md-3" id="size" name="size" style="float: right">
                     </div>
-
+                    <hr>
                     <div class="form-group row justify-content-between">
+                        <h5>How much money per night?</h5>
                         <div class="input-group mb-3  col-5">
                             <span class="input-group-text" style="height: 39px" id="basic-addon3">VNĐ/night</span>
                             <input type="number" class="form-control" id="price" aria-describedby="basic-addon3" name="price" onchange="show_bill()">
@@ -230,23 +241,35 @@
             <div class=" col-xs-6 col-md-offset-3">
                 <h3> Step 3</h3>
 
-
-                <h5>Select Images for your apartment</h5>
                 <div class="col-md-12 form-group">
-                    <div class="form-group" style="height: 60px">
-                        <select id="choices-multiple-remove-button" placeholder="Select your service" multiple name="listService">
+
+                    <hr>
+                    <h5>Select Images for your apartment</h5>
+                    <div class="form-group" style="border: whitesmoke 1px solid;border-radius: 2px">
+                        <input id="file-input" type="file" multiple name="listImages">
+                        <div class="preview"></div>
+                    </div>
+                    <br>
+                    <div class="form-group" style="border: whitesmoke 1px solid;border-radius: 2px">
+                        <h5>Short describe for your Apartment</h5>
+                        <textarea id="shortDes" name="shortDes" style="height: 200px;width: 100%" ></textarea>
+                    </div>
+                    <br>
+                    <div class="form-group" style="border: whitesmoke 1px solid;border-radius: 2px">
+                        <h5>Describe Detail for your Apartment</h5>
+                        <textarea id="editor" name="detail" ></textarea>
+                    </div>
+
+                    <br>
+                    <div class="form-group" style="height: 60px ">
+                        <select id="choices-multiple-remove-button" placeholder="Select your service" multiple name="listService" >
 
                             <c:forEach items="${listService}" var="service">
                                 <option value="${service.id}">${service.detail}</option>
                             </c:forEach>
                         </select>
                     </div>
-                    <hr>
-                    <div class="form-group">
-                        <input id="file-input" type="file" multiple name="listImages">
-                        <div id="preview"></div>
-                    </div>
-                    <br>
+
                     <button class="btn btn-primary prevBtn btn-lg pull-left" type="button">Previous</button>
                     <button class="btn btn-success btn-lg pull-right" type="submit">Submit</button>
                 </div>
@@ -327,7 +350,37 @@
     }
     function previewImages() {
 
-        var preview = document.querySelector('#preview');
+        var preview = document.querySelector('.preview');
+
+        if (this.files) {
+            [].forEach.call(this.files, readAndPreview);
+        }
+
+        function readAndPreview(file) {
+
+            // Make sure `file.name` matches our extensions criteria
+            if (!/\.(jpe?g|png|gif)$/i.test(file.name)) {
+                return alert(file.name + " is not an image");
+            } // else...
+
+            var reader = new FileReader();
+
+            reader.addEventListener("load", function() {
+                var image = new Image();
+                image.height = 100;
+                image.title  = file.name;
+                image.src    = this.result;
+                preview.appendChild(image);
+            });
+
+            reader.readAsDataURL(file);
+
+        }
+
+    }
+    function showImages() {
+
+        var preview = document.querySelector('#show_img');
 
         if (this.files) {
             [].forEach.call(this.files, readAndPreview);
@@ -357,6 +410,7 @@
     }
 
     document.querySelector('#file-input').addEventListener("change", previewImages);
+    document.querySelector('#file-input_logo').addEventListener("change", showImages);
     $(document).ready(function(){
 
         var multipleCancelButton = new Choices('#choices-multiple-remove-button', {
@@ -368,4 +422,14 @@
 
 
     });
+
+
+</script>
+<script src="https://cdn.ckeditor.com/ckeditor5/27.0.0/classic/ckeditor.js"></script>
+<script>
+    ClassicEditor
+        .create( document.querySelector( '#editor' ) )
+        .catch( error => {
+            console.error( error );
+        } );
 </script>

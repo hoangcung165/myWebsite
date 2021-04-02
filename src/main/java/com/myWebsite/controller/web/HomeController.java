@@ -47,6 +47,8 @@ public class HomeController {
     ServletContext servletContext;
     @Autowired
     private ImageService imageService;
+    @Autowired
+    private ApartmentService apartmentService;
 
 
     @RequestMapping(value = "/home",method = RequestMethod.GET)
@@ -131,9 +133,10 @@ public class HomeController {
     }
 
     @RequestMapping(value = "/test",method = RequestMethod.POST)
-    public String test(@RequestParam("file")CommonsMultipartFile file, HttpSession session,HttpServletRequest request){
-        imageService.uploadImage(file);
-        return "redirect:/";
+    public ModelAndView test(@RequestParam("detail")String detail){
+        ModelAndView modelAndView=new ModelAndView("web/home");
+        modelAndView.addObject("detail",detail);
+        return modelAndView;
     }
 
     @RequestMapping(value = "/upfile")
@@ -198,6 +201,15 @@ public class HomeController {
 
         return "redirect:/profile?change=fail";
     }
+
+    @RequestMapping(value = "/getAll")
+    public ModelAndView getAll(){
+        List<Apartment> apartmentList=apartmentService.findAll();
+        ModelAndView modelAndView=new ModelAndView("web/listAll");
+        modelAndView.addObject("listApartment",apartmentList);
+        return modelAndView;
+    }
+//    public
 
 
 }

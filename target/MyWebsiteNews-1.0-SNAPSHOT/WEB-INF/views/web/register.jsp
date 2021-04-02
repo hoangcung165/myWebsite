@@ -45,8 +45,8 @@
         </div>
         <div class="form-group">
             <label for="national">National</label>
-            <input type="text" class="form-control" id="national" placeholder="Confirm password" name="national">
-            <span id='message'></span>
+            <input type="text" class="form-control" id="national" placeholder="Nationality" name="national">
+
         </div>
         <div class="form-row">
             <div class="form-group col-md-3">
