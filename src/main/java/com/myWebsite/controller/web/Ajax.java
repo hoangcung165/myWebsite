@@ -126,4 +126,6 @@ public class Ajax {
 //        String typeRoomString=request.getParameter("typeRoomId");
 //
 //    }
+//    @GetMapping(value = "/booking/checkBill")
+//    public  checkBill(){}
 }

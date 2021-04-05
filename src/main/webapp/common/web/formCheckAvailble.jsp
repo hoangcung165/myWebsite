@@ -65,7 +65,7 @@
                     document.getElementById("saveSuccess").style.display="block";
                     $('#qtyRooms').show();
                     $('#qtyRoomsSelect').show();
-                    var select=$('#quantityRooms')
+                    var select=$('.qtyRs')
                     select.children('option:not(:first)').remove();
                     // $.each(result,function (index,value){
                     //     select.append(

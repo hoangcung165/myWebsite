@@ -61,10 +61,10 @@
                 </c:forEach>
             </div>
             <div class="form_booking">
-                <c:if test="${sessionScope.booking==null}">
+<%--                <c:if test="${sessionScope.booking==null}">--%>
 
                     <%@include file="/common/web/formCheckAvailble.jsp"%>
-                </c:if>
+<%--                </c:if>--%>
             </div>
 
             <h3> Rooms</h3>
@@ -88,49 +88,32 @@
 
                             <td> Type: ${room.typeRoom.type} <br>
                                   Name: ${room.roomName.name}</td>
-                            <td id="money"> <script>
-                                function showMoney(money){
-                                    var money_String=money.toString();
-                                    var out="";
-                                    var index=0;
-                                    for(var i=money_String.length-1;i>=0;i--){
-                                        out+=money_String[i];
-                                        if((index+1)%3==0 && index!=0){
-                                            out+='.';
-                                        }
-                                        index++;
-                                    }
-                                    document.getElementById("money").innerHTML = reverse(out)+" VNĐ";
-
-                                }
-                                function reverse(str){
-                                    let newString = "";
-                                    for (let i = str.length - 1; i >= 0; i--) {
-                                        newString += str[i];
-                                    }
-                                    return newString;
-                                }
-                                showMoney(${room.price})
-
-                               </script>
-
+                            <td id="money">
+                                <fm:formatNumber type="number" maxFractionDigits="3" value="${room.price}"/> VNĐ
+                                <input id="price_${room.id}" value="${room.price}" type="hidden">
                             </td>
                             <td> ${room.quantityCustomer}</td>
                             <td  id="qtyRoomsSelect">
                                 <div class="form-group">
-                                    <label for="quantityRooms">Quantity rooms</label>
-                                    <select class="form-control" id="quantityRooms" >
-
-
+                                    <label for="quantityRooms_${room.id}">Quantity rooms</label>
+                                    <select onchange="changePrice(${room.id})" class="form-control qtyRs" id="quantityRooms_${room.id}" >
+                                        <option value="0" selected>0</option>
                                     </select>
                                 </div>
 
                             </td>
-                            <td id="formShowBill"></td>
+
+                            <td id="formShowBill_${room.id}"></td>
 
                             <td>
 
-                                <a href="<c:url value="/booking/${apartment.id}/${room.id}"/>" class="btn btn-primary">Book Now</a>
+<%--                                <a href="<c:url value="/booking/${apartment.id}/${room.id}"/>" class="btn btn-primary">Add</a>--%>
+<%--                                <c:url value="/booking/checkBill" var="checkBill"></c:url>--%>
+                                <form action="<c:url value="/booking/${apartment.id}/${room.id}"/>"  id="checkBillform_${room.id}">
+                                    <input type="hidden" value="" id="amoutRooms_${room.id}" name="amount">
+                                    
+                                    <input  class="btn btn-primary" value="Add" type="submit"/>
+                                </form>
                             </td>
 
                         </tr>
@@ -168,4 +151,17 @@
        $('#qtyRooms').hide();
        $('#qtyRoomsSelect').hide();
    })
+   function changePrice(id){
+
+       var qtyRooms=parseInt($('#quantityRooms_'+id).val());
+       var price=parseInt($('#price_'+id).val());
+       var out=qtyRooms*price;
+       $('#amoutRooms_'+id).val(qtyRooms);
+
+       <%--let tag = `<fm:formatNumber type="number" maxFractionDigits="3" value="`+ out +`"/>`;--%>
+       $('#formShowBill_'+id).text('Total: '+ new Intl.NumberFormat().format(out)  +'VNĐ');
+
+   }
+
+
 </script>

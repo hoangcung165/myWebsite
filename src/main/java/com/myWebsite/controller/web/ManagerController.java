@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -52,6 +53,8 @@ public class ManagerController {
 
     @Autowired
     private SaveNewHotelService saveNewHotelService;
+    @Autowired
+    private BookingService bookingService;
 
     @RequestMapping(value = "/manager")
     public ModelAndView managerPage(){
@@ -106,9 +109,35 @@ public class ManagerController {
         System.out.println(hotelRegister.toString());
         if(saveNewHotelService.saveNewHotel(hotelRegister)){
             System.out.println("Ok");
-            return "redirect:/";
+            return "redirect:/manager";
         }
         System.out.println("cc");
         return "redirect:/";
+    }
+    @RequestMapping(value = "/manager/{id_apartment}")
+    public ModelAndView managerRooms(@PathVariable("id_apartment") Long id){
+        List<Booking> bookingsAccept=bookingService.findBookingsByApartmentIdAndStatus(id,1);
+        List<Booking> bookingsWait=bookingService.findBookingsByApartmentIdAndStatus(id,2);
+        List<Booking> bookingsCancel=bookingService.findBookingsByApartmentIdAndStatus(id,0);
+        ModelAndView modelAndView=new ModelAndView("web/managerRoom");
+        modelAndView.addObject("accept",bookingsAccept);
+        modelAndView.addObject("wait",bookingsWait);
+        modelAndView.addObject("cancel",bookingsCancel);
+        System.out.println(bookingsAccept.size());
+        System.out.println(bookingsWait.size());
+        System.out.println(bookingsCancel.size());
+        return modelAndView;
+
+    }
+    @RequestMapping(value = "/manager/accept/{id_booking}")
+    public ModelAndView acceptBooking(@PathVariable("id_booking") Long id){
+
+        ModelAndView modelAndView=new ModelAndView("redirect:/manager");
+        if(bookingService.acceptBooking(id)){
+            System.out.println("accept");
+            return modelAndView;
+        }
+        return modelAndView;
+
     }
 }

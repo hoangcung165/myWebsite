@@ -53,7 +53,8 @@ public class HomeController {
     private RoomService roomService;
     @Autowired
     private HaveServiceS haveServiceS;
-
+    @Autowired
+    private BookingService bookingService;
 
     @RequestMapping(value = "/home",method = RequestMethod.GET)
     public ModelAndView myPage(@RequestParam(value = "program",required = false) String program, Authentication authentication){
@@ -94,7 +95,7 @@ public class HomeController {
     @RequestMapping(value = "/login",method = RequestMethod.GET)
     public ModelAndView loginPage(@RequestParam(value = "error", required = false) final String error,
                                   @RequestParam(value = "registed", required = false) final String registed,
-                                  final HttpServletRequest request,
+                                  HttpServletRequest request,
                                   final Model model){
         if(request!=null && request.getHeader("Referer")!=null){
             String referrer=request.getHeader("Referer");
@@ -238,4 +239,5 @@ public class HomeController {
         modelAndView.addObject("services",haveServiceList);
         return  modelAndView;
     }
+
 }

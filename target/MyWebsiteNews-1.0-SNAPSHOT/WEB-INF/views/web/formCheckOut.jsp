@@ -101,8 +101,59 @@
 <%--                    </div>--%>
 <%--                </div>--%>
 <%--            </div>--%>
+            <h4>Booking Information</h4>
+            <c:url var="saveBooking" value="/booking/saveBooking"/>
+            <form:form action="${saveBooking}" method="get" modelAttribute="bookingInfor">
+            <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="beginDate">Check-in date</label>
+                            <input type="date" class="form-control" name="beginDate" id="beginDate" readonly value="${sessionScope.booking.beginDate}" placeholder="begin" >
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="roomName">Check-out date</label>
+                            <input type="date" class="form-control" id="endDate" name="endDate" readonly value="${sessionScope.booking.endDate}" placeholder="Gender">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="qty_Room">Amount Room</label>
+                            <input type="number" class="form-control" id="qty_Room" name="qty_Room" readonly value="${amountRooms}"  >
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="qty_Cus">Amount Room</label>
+                            <input type="number" class="form-control" id="qty_Cus" name="qty_Cus" readonly value="${sessionScope.booking.qty_customer}">
+                        </div>
+                    </div>
+                    <input type="hidden" name="apartment_id" value="${apartment.id}">
+                    <input type="hidden" name="room_id" value="${room.id}">
+                    <input type="hidden" name="payment" value="${amountRooms*room.price}">
 
 
+            </div>
+                <input type="submit" class="btn btn-primary" value="Cofim">
+            </form:form>
         </div>
+        <div class="col-4">
+            <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+                <div class="card-header">Bill</div>
+                <div class="card-body">
+                    <h5 class="card-title">You will pay</h5>
+                    <p class="card-text" style="color: white">
+                        ${amountRooms} rooms
+                        <br>
+                            <fm:formatNumber type="number" maxFractionDigits="3" value="${room.price}"/> VNĐ/night/room
+
+                        <hr>
+                        Total: <fm:formatNumber type="number" maxFractionDigits="3" value="${amountRooms*room.price}"/>  VNĐ
+                    </p>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>

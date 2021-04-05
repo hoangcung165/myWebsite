@@ -65,7 +65,7 @@
                     document.getElementById("saveSuccess").style.display="block";
                     $('#qtyRooms').show();
                     $('#qtyRoomsSelect').show();
-                    var select=$('#quantityRooms')
+                    var select=$('.qtyRs')
                     select.children('option:not(:first)').remove();
                     // $.each(result,function (index,value){
                     //     select.append(
@@ -77,6 +77,8 @@
                             $('<option></option>').val(i+1).html(i+1)
                         )
                     }
+                    var bill=$('#formShowBill');
+
                     // console.log(result.qtyRoomMax)
                 }
             },
@@ -86,6 +88,49 @@
             }
         });
     })
+    <%--function cal_bill(){--%>
+    <%--    var select=$('#quantityRooms').val();--%>
+    <%--    $.ajax({--%>
+    <%--        type : "GET",--%>
+    <%--        headers : {--%>
+    <%--            Accept : "application/json; charset=utf-8",--%>
+    <%--            "Content-Type" : "application/json; charset=utf-8"--%>
+    <%--        },--%>
+    <%--        contentType : "application/json",--%>
+    <%--        url : "${booking}",--%>
+    <%--        data : {--%>
+
+    <%--        },--%>
+
+    <%--        success : function(result) {--%>
+    <%--            if(result!=null){--%>
+    <%--                $('#preBooking').hide();--%>
+    <%--                document.getElementById("saveSuccess").style.display="block";--%>
+    <%--                $('#qtyRooms').show();--%>
+    <%--                $('#qtyRoomsSelect').show();--%>
+    <%--                var select=$('#quantityRooms')--%>
+    <%--                select.children('option:not(:first)').remove();--%>
+    <%--                // $.each(result,function (index,value){--%>
+    <%--                //     select.append(--%>
+    <%--                //         $('<option></option>').val(index+1).html(value.name)--%>
+    <%--                //     )--%>
+    <%--                // });--%>
+    <%--                for(var i=0;i<result.qtyRoomMax;i++){--%>
+    <%--                    select.append(--%>
+    <%--                        $('<option></option>').val(i+1).html(i+1)--%>
+    <%--                    )--%>
+    <%--                }--%>
+    <%--                var bill=$('#formShowBill');--%>
+
+    <%--                // console.log(result.qtyRoomMax)--%>
+    <%--            }--%>
+    <%--        },--%>
+    <%--        error : function(e) {--%>
+    <%--            console.log("url"+this.url)--%>
+    <%--            console.log("ERROR: ", e);--%>
+    <%--        }--%>
+    <%--    });--%>
+    <%--}--%>
 
 
 </script>

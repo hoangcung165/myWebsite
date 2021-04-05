@@ -38,6 +38,7 @@
 
                 <security:authorize access="isAuthenticated()">
                     <a href="<c:url value="/manager"/> " class="ml-3 book btn btn-secondary btn-style">Manager Hotel</a>
+                    <a href="<c:url value="/booking/AllMyBooking"/> " class="ml-3 book btn btn-secondary btn-style">My All Booking</a>
                     <div class="dropdown">
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color: white;border: none">
                             <i class="fa fa-user" style="color: black;font-size:25px"></i> <p style="color: black"><%=SecurityUtils.getPrincial().getFullName()%></p>
