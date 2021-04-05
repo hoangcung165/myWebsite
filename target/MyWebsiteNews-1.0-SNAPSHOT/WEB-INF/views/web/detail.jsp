@@ -9,12 +9,21 @@
     }
 </style>
 <div class="container">
+
     <div class="row">
 
         <div class="col-3">
             <%@include file="formSearch.jsp"%>
         </div>
         <div class="col-9">
+            <c:if test="${param.formBooking.equals('none')}">
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </c:if>
             <h2><span class="badge badge-secondary">${apartment.typeApartment.typeName}</span> ${apartment.name}</h2>
             <p class="text-info"><i class="fas fa-map-marker"></i>${apartment.addressApartment}</p>
             <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
@@ -51,6 +60,13 @@
                     </div>
                 </c:forEach>
             </div>
+            <div class="form_booking">
+                <c:if test="${sessionScope.booking==null}">
+
+                    <%@include file="/common/web/formCheckAvailble.jsp"%>
+                </c:if>
+            </div>
+
             <h3> Rooms</h3>
             <div class="rooms">
                 <table class="table">
@@ -60,6 +76,8 @@
                         <th scope="col">Room Name</th>
                         <th scope="col">$/night/room</th>
                         <th scope="col">Max customer/room</th>
+                        <th scope="col" id="qtyRooms" >Quantity rooms</th>
+                        <th scope="col" id="showBill" >Bill</th>
                         <th scope="col">Action</th>
 
                     </tr>
@@ -70,9 +88,50 @@
 
                             <td> Type: ${room.typeRoom.type} <br>
                                   Name: ${room.roomName.name}</td>
-                            <td> ${room.price}</td>
+                            <td id="money"> <script>
+                                function showMoney(money){
+                                    var money_String=money.toString();
+                                    var out="";
+                                    var index=0;
+                                    for(var i=money_String.length-1;i>=0;i--){
+                                        out+=money_String[i];
+                                        if((index+1)%3==0 && index!=0){
+                                            out+='.';
+                                        }
+                                        index++;
+                                    }
+                                    document.getElementById("money").innerHTML = reverse(out)+" VNĐ";
+
+                                }
+                                function reverse(str){
+                                    let newString = "";
+                                    for (let i = str.length - 1; i >= 0; i--) {
+                                        newString += str[i];
+                                    }
+                                    return newString;
+                                }
+                                showMoney(${room.price})
+
+                               </script>
+
+                            </td>
                             <td> ${room.quantityCustomer}</td>
-                            <td><a href="<c:url value="/toBooking"/>" class="btn btn-primary">Book Now</a></td>
+                            <td  id="qtyRoomsSelect">
+                                <div class="form-group">
+                                    <label for="quantityRooms">Quantity rooms</label>
+                                    <select class="form-control" id="quantityRooms" >
+
+
+                                    </select>
+                                </div>
+
+                            </td>
+                            <td id="formShowBill"></td>
+
+                            <td>
+
+                                <a href="<c:url value="/booking/${apartment.id}/${room.id}"/>" class="btn btn-primary">Book Now</a>
+                            </td>
 
                         </tr>
                     </c:forEach>
@@ -88,6 +147,7 @@
                 </div>
                 <span class="col-1"></span>
                 <div class="information col-7">
+
                     <p class="font-weight-normal">Name: ${apartment.owner.person.name}</p>
                     <p class="font-weight-normal">Phone: ${apartment.owner.person.phone}</p>
 
@@ -103,3 +163,9 @@
 
 </div>
 <br>
+<script>
+   $(document).ready(function (){
+       $('#qtyRooms').hide();
+       $('#qtyRoomsSelect').hide();
+   })
+</script>

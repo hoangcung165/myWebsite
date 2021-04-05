@@ -159,6 +159,27 @@
     <script
             src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script>
+        function showMoney(money){
+            var money_String=money.toString();
+            var out="";
+            var index=0;
+            for(var i=money_String.length-1;i>=0;i--){
+                out+=money_String[i];
+                if((index+1)%3==0 && index!=0){
+                    out+='.';
+                }
+                index++;
+            }
+            document.getElementById("money").innerHTML = reverse(out)+" VNĐ";
+
+        }
+        function reverse(str){
+            let newString = "";
+            for (let i = str.length - 1; i >= 0; i--) {
+                newString += str[i];
+            }
+            return newString;
+        }
         var check = function() {
             if (document.getElementById('password').value ==
                 document.getElementById('confirm_password').value) {

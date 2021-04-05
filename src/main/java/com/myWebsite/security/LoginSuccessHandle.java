@@ -10,6 +10,7 @@ import org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuc
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class LoginSuccessHandle extends SimpleUrlAuthenticationSuccessHandler {
 
     public void handle(HttpServletRequest request, HttpServletResponse response,
                           Authentication authentication) throws IOException, ServletException {
-        String targetUrl = determineTargetUrl(authentication);
+        String targetUrl = determineTargetUrl(authentication,request);
 
         if (response.isCommitted()) {
             return;
@@ -35,11 +36,18 @@ public class LoginSuccessHandle extends SimpleUrlAuthenticationSuccessHandler {
     public void setRedirectStrategy(RedirectStrategy redirectStrategy) {
         this.redirectStrategy = redirectStrategy;
     }
-    private String determineTargetUrl(Authentication authentication){
+    private String determineTargetUrl(Authentication authentication,HttpServletRequest request){
        String url="";
+        HttpSession session=request.getSession();
         List<String> roles= SecurityUtils.getAuthorites();
         if(isAdmin(roles)){
             url="/admin";
+        }
+        else if(session!=null){
+            url=(String) session.getAttribute("url_prior_login");
+            if(url!=null){
+                session.removeAttribute("url_prior_login");
+            }
         }
         else if(isUser(roles)){
             url="/home";

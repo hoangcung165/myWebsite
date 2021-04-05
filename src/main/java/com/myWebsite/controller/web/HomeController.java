@@ -94,7 +94,16 @@ public class HomeController {
     @RequestMapping(value = "/login",method = RequestMethod.GET)
     public ModelAndView loginPage(@RequestParam(value = "error", required = false) final String error,
                                   @RequestParam(value = "registed", required = false) final String registed,
+                                  final HttpServletRequest request,
                                   final Model model){
+        if(request!=null && request.getHeader("Referer")!=null){
+            String referrer=request.getHeader("Referer");
+            if(!referrer.contains("login") && referrer!=null){
+                request.getSession().setAttribute("url_prior_login",referrer);
+                System.out.println(referrer);
+            }
+        }
+
         String message="";
         if (error != null) {
             message="Login faild";
@@ -229,10 +238,4 @@ public class HomeController {
         modelAndView.addObject("services",haveServiceList);
         return  modelAndView;
     }
-    @RequestMapping(value = "/toBooking")
-    public String toBooking(){
-        return "web/test";
-    }
-
-
 }

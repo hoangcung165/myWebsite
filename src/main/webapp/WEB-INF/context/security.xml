@@ -8,9 +8,10 @@
 ">
     <http auto-config="false" use-expressions="true" disable-url-rewriting="true" authentication-manager-ref="manager">
 
-        <intercept-url pattern="/admin**" access="hasAnyRole('ROLE_ADMIN')" />
-        <intercept-url pattern="/manager**" access="hasAnyRole('ROLE_ADMIN','ROLE_MANAGER')"/>
-        <intercept-url pattern="/toBooking**" access="hasAnyRole('ROLE_ADMIN','ROLE_MANAGER','ROLE_USER')"/>
+        <intercept-url pattern="/admin/**" access="hasAnyRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/manager/**" access="hasAnyRole('ROLE_ADMIN','ROLE_MANAGER')"/>
+<!--        <intercept-url pattern="/booking/*" access="hasAnyRole('ROLE_ADMIN','ROLE_MANAGER','ROLE_USER')"/>-->
+        <intercept-url pattern="/booking/**" access="hasAnyRole('ROLE_ADMIN','ROLE_MANAGER','ROLE_USER')"/>
 
         <access-denied-handler error-page="/accessDenied?denied"/>
         <form-login
