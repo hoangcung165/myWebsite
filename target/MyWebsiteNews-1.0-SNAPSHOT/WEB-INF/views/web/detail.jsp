@@ -77,7 +77,10 @@
                         <th scope="col">$/night/room</th>
                         <th scope="col">Max customer/room</th>
                         <th scope="col" id="qtyRooms" >Quantity rooms</th>
+
                         <th scope="col" id="showBill" >Bill</th>
+
+
                         <th scope="col">Action</th>
 
                     </tr>
@@ -93,17 +96,20 @@
                                 <input id="price_${room.id}" value="${room.price}" type="hidden">
                             </td>
                             <td> ${room.quantityCustomer}</td>
-                            <td  id="qtyRoomsSelect">
-                                <div class="form-group">
-                                    <label for="quantityRooms_${room.id}">Quantity rooms</label>
-                                    <select onchange="changePrice(${room.id})" class="form-control qtyRs" id="quantityRooms_${room.id}" >
-                                        <option value="0" selected>0</option>
-                                    </select>
-                                </div>
 
-                            </td>
+                                <td  class="qtyRoomsSelect">
+                                    <div class="form-group">
+                                        <label for="quantityRooms_${room.id}">Quantity rooms</label>
+                                        <select onchange="changePrice(${room.id})" class="form-control qtyRs" id="quantityRooms_${room.id}" >
+                                            <option value="0" selected>0</option>
+                                        </select>
+                                    </div>
+
+                                </td>
+
 
                             <td id="formShowBill_${room.id}"></td>
+
 
                             <td>
 
@@ -111,7 +117,7 @@
 <%--                                <c:url value="/booking/checkBill" var="checkBill"></c:url>--%>
                                 <form action="<c:url value="/booking/${apartment.id}/${room.id}"/>"  id="checkBillform_${room.id}">
                                     <input type="hidden" value="" id="amoutRooms_${room.id}" name="amount">
-                                    
+                                    <input type="hidden" name="dates" value="" id="dates">
                                     <input  class="btn btn-primary" value="Add" type="submit"/>
                                 </form>
                             </td>
@@ -149,13 +155,14 @@
 <script>
    $(document).ready(function (){
        $('#qtyRooms').hide();
-       $('#qtyRoomsSelect').hide();
+       $('.qtyRoomsSelect').hide();
    })
    function changePrice(id){
 
        var qtyRooms=parseInt($('#quantityRooms_'+id).val());
        var price=parseInt($('#price_'+id).val());
-       var out=qtyRooms*price;
+       var date=parseInt($('#dates').val());
+       var out=qtyRooms*price*date;
        $('#amoutRooms_'+id).val(qtyRooms);
 
        <%--let tag = `<fm:formatNumber type="number" maxFractionDigits="3" value="`+ out +`"/>`;--%>

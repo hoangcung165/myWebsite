@@ -5,7 +5,7 @@
     <!--/nav-->
     <nav class="navbar navbar-expand-lg navbar-light fill px-lg-0 py-0 px-3">
         <div class="container">
-            <a class="navbar-brand" href="index.html">
+            <a class="navbar-brand" href="<c:url value="/home"/>">
                 <img src="<c:url value="/template/web/assets/images/hotels.png"/>" alt="Your logo" style="height:35px;" /> Hotels</a>
             <!-- if logo is image enable this
                         <a class="navbar-brand" href="#index.html">
@@ -19,13 +19,11 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active">
-                        <a class="nav-link h2" href="index.html">Home</a>
+                        <a class="nav-link h2" href="<c:url value="/home"/>">Home</a>
                     </li>
-                    <li class="nav-item @@about__active">
-                        <a class="nav-link h2" href="about.html">About</a>
-                    </li>
+
                     <li class="nav-item @@services__active">
-                        <a class="nav-link h2" href="">All</a>
+                        <a class="nav-link h2" href="<c:url value="/getAll"/>">All</a>
                     </li>
                     <li class="nav-item @@contact__active">
                         <a class="nav-link h2" href="contact.html">Contact</a>

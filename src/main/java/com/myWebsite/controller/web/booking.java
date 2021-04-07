@@ -47,7 +47,8 @@ public class booking {
 //    }
 
     @RequestMapping(value = "/booking/{apartment_id}/{room_id}")
-    public ModelAndView booking(HttpServletRequest request,@PathVariable("apartment_id")String apartment_id,@PathVariable("room_id")String room_id,@RequestParam("amount")String amout){
+    public ModelAndView booking(HttpServletRequest request,@PathVariable("apartment_id")String apartment_id,@PathVariable("room_id")String room_id,@RequestParam("amount")String amout,
+                                @RequestParam("dates")String amountDates){
         System.out.println(amout);
         System.out.println(room_id);
         if (request.getSession().getAttribute("booking")==null){
@@ -65,6 +66,7 @@ public class booking {
         modelAndView.addObject("apartment",apartment);
         modelAndView.addObject("room",room);
         modelAndView.addObject("amountRooms", Integer.parseInt(amout));
+        modelAndView.addObject("amountDates", Integer.parseInt(amountDates));
         return modelAndView;
     }
     @RequestMapping(value = "/booking/saveBooking")

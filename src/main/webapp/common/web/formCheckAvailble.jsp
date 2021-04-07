@@ -37,7 +37,7 @@
     </div>
 
 
-    <input class="btn btn-primary" id="checkAvailble" type="submit" value="Check Availble">
+    <input class="btn btn-primary" id="checkAvailble" type="submit" value="Check Price">
 </form:form>
 <div class="alert alert-success" role="alert" id="saveSuccess" style="display: none" >
     <h4 class="alert-heading">Well done!</h4>
@@ -64,7 +64,7 @@
                     $('#preBooking').hide();
                     document.getElementById("saveSuccess").style.display="block";
                     $('#qtyRooms').show();
-                    $('#qtyRoomsSelect').show();
+                    $('.qtyRoomsSelect').show();
                     var select=$('.qtyRs')
                     select.children('option:not(:first)').remove();
                     // $.each(result,function (index,value){
@@ -78,6 +78,8 @@
                         )
                     }
                     var bill=$('#formShowBill');
+                    var dateNumber=result.dates
+                    $('#dates').val(dateNumber)
 
                     // console.log(result.qtyRoomMax)
                 }

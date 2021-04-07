@@ -46,7 +46,7 @@
                                 </label>
                             </div>
                             <div class="w-50 text-md-right">
-                                <a href="#" style="color: #fff">Forgot Password</a>
+                                <a href="<c:url value="/register"/>" style="color: #fff">Register Account</a>
                             </div>
                         </div>
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />

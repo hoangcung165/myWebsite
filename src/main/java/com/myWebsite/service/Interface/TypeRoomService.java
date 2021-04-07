@@ -8,4 +8,6 @@ public interface TypeRoomService {
     TypeRoom save(TypeRoom typeRoom);
     TypeRoom findByID(Long id);
     List<TypeRoom> findAll();
+    boolean deleteById(Long id);
+    boolean update(Long id,String newName);
 }

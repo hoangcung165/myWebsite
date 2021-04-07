@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.List;
 @Entity
 @Table(name = "Appartment")
-public class Apartment {
+public class Apartment extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

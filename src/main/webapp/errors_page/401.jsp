@@ -25,7 +25,7 @@
                                     <p>Access to this resource is denied.</p>
                                     <a href="<c:url value="/home" />">
                                         <i class="fas fa-arrow-left mr-1"></i>
-                                        Return to Home Page
+                                        Go Home Page
                                     </a>
                                 </div>
                             </div>

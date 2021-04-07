@@ -30,7 +30,7 @@
                         <li><span class="fa fa-check" aria-hidden="true"></span>Double rooms and family rooms</li>
                         <li><span class="fa fa-check" aria-hidden="true"></span>Enjoy a luxury experience</li>
                     </ul>
-                    <a href="about.html" class="btn btn-style btn-primary mt-4">Check all packages</a>
+                    <a href="about.html" class="btn btn-style btn-primary mt-4">Policy and Conditions</a>
                 </div>
             </div>
         </div>

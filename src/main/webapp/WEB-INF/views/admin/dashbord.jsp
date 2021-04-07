@@ -81,6 +81,7 @@
                             <th>Email</th>
                             <th>Nationality</th>
                             <th>Phone</th>
+                            <th>Action</th>
                         </tr>
                         </thead>
                         <tfoot>
@@ -92,6 +93,7 @@
                             <th>Email</th>
                             <th>Nationality</th>
                             <th>Phone</th>
+                            <th>Action</th>
                         </tr>
                         </tfoot>
                         <tbody>
@@ -104,6 +106,13 @@
                                 <td>${u.mail}</td>
                                 <td>${u.nationality}</td>
                                 <td>${u.phone}</td>
+                                <td ><c:if test="${u.status==1}">
+                                        <a href="" class="text-danger">Ban</a>
+                                    </c:if>
+                                    <c:if test="${u.status==0}">
+                                        <a href="" class="text-success">Unlock</a>
+                                    </c:if>
+                                </td>
                             </tr>
                         </c:forEach>
 

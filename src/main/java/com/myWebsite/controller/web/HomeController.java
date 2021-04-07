@@ -1,10 +1,7 @@
 package com.myWebsite.controller.web;
 
 
-import com.myWebsite.dto.ChangePassword;
-import com.myWebsite.dto.MyUser;
-import com.myWebsite.dto.UserUpdateInfor;
-import com.myWebsite.dto.formRegister;
+import com.myWebsite.dto.*;
 import com.myWebsite.entity.*;
 import com.myWebsite.service.Interface.*;
 import com.myWebsite.utils.SecurityUtils;
@@ -22,7 +19,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 @Controller
 public class HomeController {
@@ -72,8 +71,8 @@ public class HomeController {
             System.out.println(myUser.getFullName());
             mav.addObject("user",myUser);
         }
-
-        System.out.println("home Page");
+        List<devvn_tinhthanhpho> devvn_tinhthanhphoList=tinhService.getAll();
+        mav.addObject("listTinhThanh",devvn_tinhthanhphoList);
 
 
         return mav;
@@ -99,7 +98,8 @@ public class HomeController {
                                   final Model model){
         if(request!=null && request.getHeader("Referer")!=null){
             String referrer=request.getHeader("Referer");
-            if(!referrer.contains("login") && referrer!=null){
+            System.out.println(referrer);
+            if(!referrer.contains("login") && referrer!=null && !referrer.contains("register")){
                 request.getSession().setAttribute("url_prior_login",referrer);
                 System.out.println(referrer);
             }
@@ -238,6 +238,58 @@ public class HomeController {
         modelAndView.addObject("rooms",rooms);
         modelAndView.addObject("services",haveServiceList);
         return  modelAndView;
+    }
+    @RequestMapping(value = "listApartment/{type_id}")
+    public ModelAndView filterByType(@PathVariable("type_id") Long typeId){
+        List<Apartment> apartments=apartmentService.findAllbyType(typeId);
+
+
+        ModelAndView modelAndView=new ModelAndView("web/listAll");
+        modelAndView.addObject("listApartment",apartments);
+        return modelAndView;
+    }
+    @RequestMapping(value = "/listApartmentByTinh")
+    public ModelAndView filbyTinh(@ModelAttribute("preBooking") preBooking booking, HttpServletRequest request){
+
+        List<Apartment> apartments=apartmentService.findAllbyAddress(booking.getId_TinhThanh());
+
+
+        ModelAndView modelAndView=new ModelAndView("web/listAll");
+        modelAndView.addObject("listApartment",apartments);
+        HttpSession session=request.getSession();
+        session.setAttribute("booking",booking);
+        return modelAndView;
+
+//        SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
+//        try {
+//            Date date1=dateFormat.parse(booking.getBeginDate());
+//            Date date2=dateFormat.parse(booking.getEndDate());
+//            long diff=date2.getTime()-date1.getTime();
+//            System.out.println ("Days: " + TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
+//            int dates=(int)TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+//            out.setDates(dates);
+//            out.setQtyRoomMax(booking.getQty_customer());
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
+//
+//        System.out.println(booking);
+//        System.out.println(out);
+//        HttpSession session=request.getSession();
+//        session.setAttribute("booking",booking);
+//        return out;
+    }
+    @RequestMapping(value = "/listApartmentByTinh/{tinh_id}")
+    public ModelAndView findbyTinh(@PathVariable("tinh_id")String tinhId){
+
+        List<Apartment> apartments=apartmentService.findAllbyAddress(tinhId);
+
+
+        ModelAndView modelAndView=new ModelAndView("web/listAll");
+        modelAndView.addObject("listApartment",apartments);
+//
+        return modelAndView;
+
     }
 
 }

@@ -95,6 +95,19 @@ public class BookingServiceImpl implements BookingService {
 
     }
 
+    @Override
+    public boolean cancelBooking(Long id) {
+        try{
+            Booking booking=bookingReposity.findById(id).get();
+            booking.setStatus(0);
+            bookingReposity.save(booking);
+            return true;
+        }
+        catch (Exception e){
+            return false;
+        }
+    }
+
 
     private Apartment findApartment(Long id){
         return apartmentService.findById(id);

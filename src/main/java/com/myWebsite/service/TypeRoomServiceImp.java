@@ -29,4 +29,29 @@ public class TypeRoomServiceImp implements TypeRoomService {
     public List<TypeRoom> findAll() {
         return (List<TypeRoom>) typeRoomReposity.findAll();
     }
+
+    @Override
+    public boolean deleteById(Long id) {
+        try{
+            typeRoomReposity.deleteById(id);
+            return true;
+        }
+        catch (Exception e){
+            return false;
+        }
+    }
+
+    @Override
+    public boolean update(Long id, String newName) {
+        try{
+            TypeRoom typeRoom=typeRoomReposity.findById(id).get();
+            typeRoom.setType(newName);
+            typeRoomReposity.save(typeRoom);
+            return true;
+        }
+        catch (Exception e){
+            return false;
+        }
+
+    }
 }

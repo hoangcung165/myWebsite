@@ -10,7 +10,10 @@
 <div class="container">
     
    <div class="row">
-        <%@include file="/common/web/formBooking.jsp"%>
+       <c:if test="${sessionScope.booking==null}">
+           <%@include file="/common/web/formBooking.jsp"%>
+       </c:if>
+
        <div class="col-3">
            <c:if test="${sessionScope.booking==null}">
                <%@include file="formSearch.jsp"%>

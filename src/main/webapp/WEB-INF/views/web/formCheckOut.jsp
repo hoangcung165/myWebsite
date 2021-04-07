@@ -125,13 +125,19 @@
                     </div>
                     <div class="col">
                         <div class="form-group">
-                            <label for="qty_Cus">Amount Room</label>
+                            <label for="qty_Cus">Amount Customer</label>
                             <input type="number" class="form-control" id="qty_Cus" name="qty_Cus" readonly value="${sessionScope.booking.qty_customer}">
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="form-group">
+                            <label for="qty_dates">Quantity date</label>
+                            <input type="number" class="form-control" id="qty_dates" name="qty_dates" readonly value="${amountDates}">
                         </div>
                     </div>
                     <input type="hidden" name="apartment_id" value="${apartment.id}">
                     <input type="hidden" name="room_id" value="${room.id}">
-                    <input type="hidden" name="payment" value="${amountRooms*room.price}">
+                    <input type="hidden" name="payment" value="${amountRooms*room.price*amountDates}">
 
 
             </div>
@@ -147,9 +153,10 @@
                         ${amountRooms} rooms
                         <br>
                             <fm:formatNumber type="number" maxFractionDigits="3" value="${room.price}"/> VNĐ/night/room
-
+                        <br>
+                            ${amountDates} dates
                         <hr>
-                        Total: <fm:formatNumber type="number" maxFractionDigits="3" value="${amountRooms*room.price}"/>  VNĐ
+                        Total: <fm:formatNumber type="number" maxFractionDigits="3" value="${amountRooms*room.price*amountDates}"/>  VNĐ
                     </p>
                 </div>
             </div>

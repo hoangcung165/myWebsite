@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class RoomName extends BaseEntity{
     @Column(name = "name")
     private String name;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "type_id")
     private TypeRoom typeRoom;
 

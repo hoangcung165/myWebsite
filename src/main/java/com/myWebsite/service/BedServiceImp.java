@@ -17,4 +17,36 @@ public class BedServiceImp implements BedService {
     public List<Bed> findAll() {
         return bedReposity.findAll();
     }
+
+    @Override
+    public boolean save(Bed bed) {
+        try {
+            bedReposity.save(bed);
+            return true;
+        }
+        catch (Exception e){
+            return false;
+        }
+
+    }
+
+    @Override
+    public boolean deletebyID(Long id) {
+        try{
+            bedReposity.deleteById(id);
+            return true;
+        }
+        catch (Exception e){
+            return false;
+        }
+
+    }
+
+    @Override
+    public boolean updateBed(Long id, String newName) {
+        Bed bed=bedReposity.findById(id).get();
+        bed.setTypeName(newName);
+
+        return save(bed);
+    }
 }

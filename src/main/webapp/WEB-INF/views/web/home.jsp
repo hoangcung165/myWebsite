@@ -4,6 +4,6 @@
 
 <%@include file="/common/web/silde.jsp"%>
 <%@include file="/common/web/formBooking.jsp"%>
-<%@include file="/common/web/about.jsp"%>
+<%@include file="/common/web/ListTypeApartment.jsp"%>
 <%@include file="/common/web/typeRoom.jsp"%>
 <%@include file="/common/web/Pakage.jsp"%>

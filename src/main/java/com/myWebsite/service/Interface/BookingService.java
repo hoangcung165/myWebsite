@@ -14,4 +14,5 @@ public interface BookingService {
     List<Booking> findBookingsByApartmentIdAndStatus(Long id,int status);
 //    Booking findById(Long id);
     boolean acceptBooking(Long id);
+    boolean cancelBooking(Long id);
 }

@@ -9,5 +9,9 @@ public interface ApartmentService {
     List<Apartment> findAllByOwner(Manager manager);
     boolean save(Apartment apartment);
     List<Apartment> findAll();
+    List<Apartment> findAllbyType(Long typeId);
+    List<Apartment> findAllbyAddress(String mtp);
     Apartment findById(Long id);
+
+
 }

@@ -8,4 +8,6 @@ import java.util.List;
 
 public interface ApartmentReposity extends JpaRepository<Apartment,Long> {
     List<Apartment> findAllByOwner(Manager manager);
+    List<Apartment> findApartmentsByTypeApartmentId(Long typeId);
+    List<Apartment> findApartmentsByAddressApartment_TinhthanhphoAddressMatp(String mtp);
 }

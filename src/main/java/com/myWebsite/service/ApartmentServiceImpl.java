@@ -37,6 +37,16 @@ public class ApartmentServiceImpl implements ApartmentService {
     }
 
     @Override
+    public List<Apartment> findAllbyType(Long typeId) {
+        return reposity.findApartmentsByTypeApartmentId(typeId);
+    }
+
+    @Override
+    public List<Apartment> findAllbyAddress(String mtp) {
+        return reposity.findApartmentsByAddressApartment_TinhthanhphoAddressMatp(mtp);
+    }
+
+    @Override
     public Apartment findById(Long id) {
         return reposity.findById(id).get();
     }

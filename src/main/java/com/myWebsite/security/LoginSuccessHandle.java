@@ -43,7 +43,7 @@ public class LoginSuccessHandle extends SimpleUrlAuthenticationSuccessHandler {
         if(isAdmin(roles)){
             url="/admin";
         }
-        else if(session!=null){
+        else if(session.getAttribute("url_prior_login")!=null){
             url=(String) session.getAttribute("url_prior_login");
             if(url!=null){
                 session.removeAttribute("url_prior_login");

@@ -24,4 +24,21 @@ public class RoomNameServiceImpl implements RoomNameService {
     public RoomName findById(Long id) {
         return roomNameReposity.findById(id).get();
     }
+
+    @Override
+    public List<RoomName> findAll() {
+        return roomNameReposity.findAll();
+    }
+
+    @Override
+    public boolean save(RoomName roomName) {
+        try {
+            roomNameReposity.save(roomName);
+            return true;
+        }
+        catch (Exception e){
+            return false;
+        }
+
+    }
 }
