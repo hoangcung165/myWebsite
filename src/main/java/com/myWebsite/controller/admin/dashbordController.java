@@ -154,7 +154,22 @@ public class dashbordController {
 
         return "redirect:/admin/tableManager/RoomName?saveNew=fail";
     }
-
+    @RequestMapping(value = "/admin/BanAcc/{id}")
+    public String BanAcc(@PathVariable("id")Long id){
+        Person person=personService.findById(id);
+        if(personService.updateStatus(person,0)){
+            return "redirect:/admin";
+        }
+        return "redirect:/admin";
+    }
+    @RequestMapping(value = "/admin/UnlockAcc/{id}")
+    public String UnlockAcc(@PathVariable("id")Long id){
+        Person person=personService.findById(id);
+        if(personService.updateStatus(person,1)){
+            return "redirect:/admin";
+        }
+        return "redirect:/admin";
+    }
 
 
 

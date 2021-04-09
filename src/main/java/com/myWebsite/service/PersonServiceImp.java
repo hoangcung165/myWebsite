@@ -142,6 +142,19 @@ public class PersonServiceImp implements PersonService {
         return false;
     }
 
+    @Override
+    public boolean updateStatus(Person person, int status) {
+       try{
+           person.setStatus(status);
+           save(person);
+           return true;
+       }
+       catch (Exception e){
+           return false;
+       }
+
+    }
+
     private boolean checkExist(String email){
         Person person=reposity.findPersonByMail(email);
         if(person!=null){

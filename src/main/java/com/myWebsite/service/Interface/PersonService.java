@@ -18,4 +18,5 @@ public interface PersonService {
     boolean updateAvatar(Long id, CommonsMultipartFile image);
     boolean updateInformattion(UserUpdateInfor userUpdateInfor) throws ParseException;
     boolean changePassword(ChangePassword changePassword);
+    boolean updateStatus(Person person,int status);
 }

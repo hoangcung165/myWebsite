@@ -61,7 +61,7 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <form action="<c:url value="/admin/tableManager/update/${rN.id}"/>" method="post">
+                                    <form action="<c:url value="/admin/tableManager/RoomName/update/${rN.id}"/>" method="post">
                                         <div class="form-group">
                                             <label for="updateBed${rN.id}">Bed Name</label>
                                             <input type="text" name="roomNameS" class="form-control" id="updateBed${rN.id}" aria-describedby="emailHelp" value="${rN.typeRoom.type}">

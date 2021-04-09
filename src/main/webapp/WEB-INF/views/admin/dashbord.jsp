@@ -107,10 +107,10 @@
                                 <td>${u.nationality}</td>
                                 <td>${u.phone}</td>
                                 <td ><c:if test="${u.status==1}">
-                                        <a href="" class="text-danger">Ban</a>
+                                        <a href="<c:url value="/admin/BanAcc/${u.id}"/>" class="text-danger">Ban</a>
                                     </c:if>
                                     <c:if test="${u.status==0}">
-                                        <a href="" class="text-success">Unlock</a>
+                                        <a href="<c:url value="/admin/UnlockAcc/${u.id}"/>" class="text-success">Unlock</a>
                                     </c:if>
                                 </td>
                             </tr>
